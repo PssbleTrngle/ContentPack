@@ -2,6 +2,7 @@ package com.possible_triangle.content_packs.loader.definition.item;
 
 import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 
@@ -15,6 +16,6 @@ public abstract class ItemDefinitionType {
 
     public abstract Codec<? extends ItemDefinitionType> codec();
 
-    public abstract Item create(ItemDefinition definition);
+    public abstract Item create(ResourceLocation id, ItemDefinition definition);
 
 }

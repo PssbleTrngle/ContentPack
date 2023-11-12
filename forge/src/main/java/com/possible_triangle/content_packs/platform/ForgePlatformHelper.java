@@ -4,6 +4,8 @@ import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.repository.Pack;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.NewRegistryEvent;
@@ -34,5 +36,11 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public <T> RegistryCodecSupplier<T> createRegistry(Class<T> clazz, ResourceKey<Registry<T>> key) {
         var builder = new RegistryBuilder<T>().setName(key.location());
         return new RegistryDelegate<>(builder);
+    }
+
+    @Override
+    public Pack.PackConstructor createPackConstructor() {
+        return (name, component, b, supplier, packMetadataSection, position, packSource, hidden) ->
+                new Pack(name, component, b, supplier, packMetadataSection, PackType.SERVER_DATA, position, packSource, hidden);
     }
 }

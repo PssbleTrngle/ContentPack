@@ -1,12 +1,10 @@
 package com.possible_triangle.content_packs.loader;
 
+import com.possible_triangle.content_packs.platform.Services;
 import net.minecraft.Util;
-import net.minecraft.network.chat.Component;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.metadata.pack.PackMetadataSection;
 import net.minecraft.server.packs.repository.FolderRepositorySource;
-import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackRepository;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraft.server.packs.repository.RepositorySource;
@@ -19,7 +17,6 @@ import java.io.File;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
-import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public class ContentLoader  {
@@ -37,11 +34,7 @@ public class ContentLoader  {
 
     public ContentLoader(Executor executor, File directory) {
         this.executor = executor;
-        this.packRepository = new PackRepository(this::createPack, createDefaultSources(directory).toArray(RepositorySource[]::new));
-    }
-
-    private Pack createPack(String name, Component component, boolean b, Supplier<PackResources> supplier, PackMetadataSection packMetadataSection, Pack.Position position, PackSource packSource) {
-        return new Pack(name, component, b, supplier, packMetadataSection, PackType.SERVER_DATA, position, packSource);
+        this.packRepository = new PackRepository(Services.PLATFORM.createPackConstructor(), createDefaultSources(directory).toArray(RepositorySource[]::new));
     }
 
     public void register(PreparableReloadListener listener) {

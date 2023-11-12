@@ -3,7 +3,7 @@ package com.possible_triangle.content_packs.platform.services;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-
+import net.minecraft.server.packs.repository.Pack;
 
 
 public interface IPlatformHelper {
@@ -14,5 +14,7 @@ public interface IPlatformHelper {
     interface RegistryCodecSupplier<T> {
         Codec<T> byNameCodec();
     }
+
+    Pack.PackConstructor createPackConstructor();
 
 }

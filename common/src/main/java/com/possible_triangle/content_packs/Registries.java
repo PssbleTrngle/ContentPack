@@ -16,7 +16,7 @@ public class Registries {
                 ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "block_type"));
 
         public static final ResourceKey<Registry<Codec<? extends ItemDefinitionType>>> ITEM_TYPES =
-                ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "block_type"));
+                ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "item_type"));
     }
 
     @SuppressWarnings("unchecked")

@@ -1,32 +1,24 @@
 package com.possible_triangle.content_packs.loader.definition.block;
 
-import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
+import com.mojang.serialization.Lifecycle;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.possible_triangle.content_packs.loader.definition.item.BasicItemType;
-import com.possible_triangle.content_packs.loader.definition.item.ItemDefinition;
+import com.possible_triangle.content_packs.Constants;
+import net.minecraft.core.Registry;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 
-import java.util.Optional;
+import java.util.Objects;
+import java.util.function.Supplier;
 
-public record BlockDefinition(BlockDefinitionType type, Optional<ItemDefinition> item) {
-
-    private static final ItemDefinition BASIC_ITEM_DEFINITION = new ItemDefinition(BasicItemType.INSTANCE);
-
-    private static final Codec<Optional<ItemDefinition>> BLOCK_ITEM_CODEC = Codec.either(Codec.BOOL, ItemDefinition.CODEC).xmap(it ->
-                    it.map(
-                            shouldCreate -> shouldCreate ? Optional.of(BASIC_ITEM_DEFINITION) : Optional.empty(),
-                            Optional::of
-                    ),
-            it -> it.<Either<Boolean, ItemDefinition>>map(Either::right).orElse(Either.left(false))
-    );
+public record BlockDefinition(BlockDefinitionType type) implements BlockFactory {
 
     public static final Codec<BlockDefinition> CODEC = RecordCodecBuilder.create(builder ->
             builder.group(
-                    BlockDefinitionType.CODEC.optionalFieldOf("type", BasicBlockType.INSTANCE).forGetter(BlockDefinition::type),
-                    BLOCK_ITEM_CODEC.optionalFieldOf("item", Optional.empty()).forGetter(BlockDefinition::item)
+                    BlockDefinitionType.CODEC.optionalFieldOf("type", BasicBlockType.INSTANCE).forGetter(BlockDefinition::type)
             ).apply(builder, BlockDefinition::new)
     );
 
@@ -38,8 +30,18 @@ public record BlockDefinition(BlockDefinitionType type, Optional<ItemDefinition>
         return BlockBehaviour.Properties.of(material());
     }
 
-    public Block create() {
-        return type().create(this);
+    @Override
+    public Block create(ResourceLocation id) {
+        Objects.requireNonNull(id);
+        return this.register(id).get();
+    }
+
+    public Supplier<Block> register(ResourceLocation id) {
+        Constants.LOGGER.debug("registered block with id {}", id);
+
+        var key = ResourceKey.create(Registry.BLOCK_REGISTRY, id);
+        var holder = Registry.BLOCK.register(key, type().create(id, this), Lifecycle.stable());
+        return holder::value;
     }
 
 }

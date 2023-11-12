@@ -15,11 +15,10 @@
 
   "environment": "*",
   "entrypoints": {
+    "main": ["com.possible_triangle.content_packs.FabricEntrypoint"],
     "server": ["com.possible_triangle.content_packs.FabricEntrypoint"],
     "client": ["com.possible_triangle.content_packs.FabricEntrypoint"]
   },
-
-  "mixins": ["${mod_id}.mixins.json"],
 
   "depends": {
     "fabricloader": ">=0.14",
