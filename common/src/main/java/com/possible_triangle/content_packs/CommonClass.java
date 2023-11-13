@@ -19,39 +19,39 @@ public class CommonClass {
 
     private static final String PACK_FOLDER = "contentpacks";
 
-  //  private static final RegistryAccess REGISTRY_ACCESS = RegistryAccess.builtinCopy();
+    //  private static final RegistryAccess REGISTRY_ACCESS = RegistryAccess.builtinCopy();
     private static final RegistryAccess REGISTRY_ACCESS = null;
 
     static {
         Registries.load();
     }
 
-    private static void registerAndLoad(ContentLoader loader, RegistryAccess registryAccess) {
+    private static void registerAndLoad(ContentLoader loader, RegistryEvent event, RegistryAccess registryAccess) {
         Constants.LOGGER.info("loading contentpacks");
 
         // TODO call events
-        loader.register(new BlockDefinitionListener(registryAccess));
-        loader.register(new ItemDefinitionListener(registryAccess));
-        loader.load();
+        loader.register(new BlockDefinitionListener(registryAccess, event));
+        loader.register(new ItemDefinitionListener(registryAccess, event));
+        loader.load().done().join();
     }
 
-    public static void serverInit() {
+    public static void serverInit(RegistryEvent event) {
         var loader = new ContentLoader(Util.backgroundExecutor(), new File(".", PACK_FOLDER));
-        registerAndLoad(loader, REGISTRY_ACCESS);
+        registerAndLoad(loader, event, REGISTRY_ACCESS);
     }
 
-    public static void clientInit() {
+    public static void clientInit(RegistryEvent event) {
         var minecraft = Minecraft.getInstance();
         var loader = new ContentLoader(minecraft, new File(minecraft.gameDirectory, PACK_FOLDER));
-        registerAndLoad(loader, REGISTRY_ACCESS);
+        registerAndLoad(loader, event, REGISTRY_ACCESS);
     }
 
     public static void registerTypes(RegistryEvent event) {
-        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation("basic"), BasicBlockType.CODEC);
-        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation("create", "cog"), CogBlockType.CODEC);
+        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation("basic"), () -> BasicBlockType.CODEC);
+        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation("create", "cog"), () -> CogBlockType.CODEC);
 
-        event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation("basic"), BasicItemType.CODEC);
-        event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation("block_item"), BasicBlockItemType.CODEC);
+        event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation("basic"), () -> BasicItemType.CODEC);
+        event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation("block_item"), () -> BasicBlockItemType.CODEC);
     }
 
     public static void load() {

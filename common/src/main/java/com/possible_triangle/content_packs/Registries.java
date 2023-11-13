@@ -9,6 +9,9 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.Collection;
+import java.util.List;
+
 public class Registries {
 
     public static class Keys {
@@ -17,6 +20,10 @@ public class Registries {
 
         public static final ResourceKey<Registry<Codec<? extends ItemDefinitionType>>> ITEM_TYPES =
                 ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "item_type"));
+
+        public static Collection<ResourceLocation> getPriorityKeys() {
+            return List.of(BLOCK_TYPES.location(), ITEM_TYPES.location());
+        }
     }
 
     @SuppressWarnings("unchecked")

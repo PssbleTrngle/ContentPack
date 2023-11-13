@@ -11,8 +11,28 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 
+import java.util.function.Supplier;
+
 @Mod(Constants.MOD_ID)
 public class ForgeEntrypoint {
+
+    private static RegistryEvent createRegisterEvent(RegisterEvent event) {
+        return new RegistryEvent() {
+            @Override
+            public <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory) {
+                if (event.getRegistryKey().equals(registry)) {
+                    var value = factory.get();
+                    event.register(registry, id, () -> value);
+                    return () -> value;
+                } else {
+                    return () -> {
+                        throw new IllegalStateException();
+                    };
+                }
+
+            }
+        };
+    }
 
     public ForgeEntrypoint() {
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -20,18 +40,15 @@ public class ForgeEntrypoint {
         CommonClass.load();
 
         modBus.addListener((RegisterEvent event) -> {
-            CommonClass.registerTypes(new RegistryEvent() {
-                @Override
-                public <T> void register(ResourceKey<Registry<T>> registry, ResourceLocation id, T value) {
-                    event.register(registry, id, () -> value);
-                }
-            });
+            CommonClass.registerTypes(createRegisterEvent(event));
         });
 
         modBus.addListener(EventPriority.LOWEST, (RegisterEvent event) -> {
-            if(!event.getRegistryKey().equals(Registry.BIOME_REGISTRY)) return;
-            DistExecutor.safeRunWhenOn(Dist.CLIENT, () -> CommonClass::clientInit);
-            DistExecutor.safeRunWhenOn(Dist.DEDICATED_SERVER, () -> CommonClass::serverInit);
+            var wrappedEvent = createRegisterEvent(event);
+            // if (event.getRegistryKey().equals(Registries.Keys.ITEM_TYPES)) {
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CommonClass.clientInit(wrappedEvent));
+            DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> CommonClass.serverInit(wrappedEvent));
+            //}
         });
     }
 }

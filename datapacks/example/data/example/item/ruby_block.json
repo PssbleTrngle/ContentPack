@@ -1,3 +1,6 @@
 {
-  "block": {}
+  "type": "block_item",
+  "block": {
+    "material": "metal"
+  }
 }

@@ -2,6 +2,7 @@ package com.possible_triangle.content_packs.loader.definition.block;
 
 import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.Registries;
+import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.block.Block;
@@ -16,6 +17,6 @@ public abstract class BlockDefinitionType {
 
     abstract Codec<? extends BlockDefinitionType> codec();
 
-    public abstract Block create(ResourceLocation id, BlockDefinition definition);
+    public abstract Block create(RegistryEvent event, ResourceLocation id, BlockDefinition definition);
 
 }

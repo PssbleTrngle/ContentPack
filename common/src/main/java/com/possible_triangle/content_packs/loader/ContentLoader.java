@@ -1,7 +1,6 @@
 package com.possible_triangle.content_packs.loader;
 
 import com.possible_triangle.content_packs.platform.Services;
-import net.minecraft.Util;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.FolderRepositorySource;
@@ -49,7 +48,7 @@ public class ContentLoader  {
     }
 
     public ReloadInstance load() {
-        return this.manager.createReload(Util.backgroundExecutor(), this.executor, INITIAL_TASK, this.findPacks());
+        return this.manager.createReload(this.executor, this.executor, INITIAL_TASK, this.findPacks());
     }
 
 }

@@ -1,6 +1,7 @@
 package com.possible_triangle.content_packs.loader.definition.item;
 
 import com.mojang.serialization.Codec;
+import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
@@ -16,7 +17,7 @@ public class BasicItemType extends ItemDefinitionType {
     }
 
     @Override
-    public Item create(ResourceLocation id, ItemDefinition definition) {
+    public Item create(RegistryEvent event, ResourceLocation id, ItemDefinition definition) {
         return new Item(definition.properties());
     }
 

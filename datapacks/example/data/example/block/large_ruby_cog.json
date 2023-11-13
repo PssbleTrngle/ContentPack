@@ -1,4 +1,5 @@
 {
   "type": "create:cog",
+  "material": "metal",
   "large": true
 }

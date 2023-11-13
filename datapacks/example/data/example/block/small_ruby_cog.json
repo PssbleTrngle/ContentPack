@@ -1,3 +1,4 @@
 {
-  "type": "create:cog"
+  "type": "create:cog",
+  "material": "metal"
 }

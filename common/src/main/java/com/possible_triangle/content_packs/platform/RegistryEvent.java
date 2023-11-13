@@ -4,10 +4,12 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
+import java.util.function.Supplier;
+
 
 @FunctionalInterface
 public interface RegistryEvent {
 
-    <T> void register(ResourceKey<Registry<T>> registry, ResourceLocation id, T value);
+    <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory);
 
 }
