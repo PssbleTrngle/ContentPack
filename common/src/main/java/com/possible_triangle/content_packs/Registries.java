@@ -1,8 +1,8 @@
 package com.possible_triangle.content_packs;
 
 import com.mojang.serialization.Codec;
-import com.possible_triangle.content_packs.loader.definition.block.BlockDefinitionType;
-import com.possible_triangle.content_packs.loader.definition.item.ItemDefinitionType;
+import com.possible_triangle.content_packs.loader.definition.block.BlockDefinition;
+import com.possible_triangle.content_packs.loader.definition.item.ItemDefinition;
 import com.possible_triangle.content_packs.platform.Services;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper.RegistryCodecSupplier;
 import net.minecraft.core.Registry;
@@ -15,10 +15,10 @@ import java.util.List;
 public class Registries {
 
     public static class Keys {
-        public static final ResourceKey<Registry<Codec<? extends BlockDefinitionType>>> BLOCK_TYPES =
+        public static final ResourceKey<Registry<Codec<? extends BlockDefinition>>> BLOCK_TYPES =
                 ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "block_type"));
 
-        public static final ResourceKey<Registry<Codec<? extends ItemDefinitionType>>> ITEM_TYPES =
+        public static final ResourceKey<Registry<Codec<? extends ItemDefinition>>> ITEM_TYPES =
                 ResourceKey.createRegistryKey(new ResourceLocation(Constants.MOD_ID, "item_type"));
 
         public static Collection<ResourceLocation> getPriorityKeys() {
@@ -32,8 +32,8 @@ public class Registries {
     }
 
 
-    public static final RegistryCodecSupplier<Codec<? extends BlockDefinitionType>> BLOCK_TYPES = Services.PLATFORM.createRegistry(codecClass(), Keys.BLOCK_TYPES);
-    public static final RegistryCodecSupplier<Codec<? extends ItemDefinitionType>> ITEM_TYPES = Services.PLATFORM.createRegistry(codecClass(), Keys.ITEM_TYPES);
+    public static final RegistryCodecSupplier<Codec<? extends BlockDefinition>> BLOCK_TYPES = Services.PLATFORM.createRegistry(codecClass(), Keys.BLOCK_TYPES);
+    public static final RegistryCodecSupplier<Codec<? extends ItemDefinition>> ITEM_TYPES = Services.PLATFORM.createRegistry(codecClass(), Keys.ITEM_TYPES);
 
     public static void load() {
         // Loads this class

@@ -4,20 +4,21 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.loader.definition.block.BlockFactory;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 
-public class BasicBlockItemType extends BlockItemDefinitionType {
+public class BasicBlockItemType extends BlockItemDefinition {
 
     public static final Codec<BasicBlockItemType> CODEC = RecordCodecBuilder.create(builder ->
-            commonCodec(builder).apply(builder, BasicBlockItemType::new)
+            blockItemCodec(builder).apply(builder, BasicBlockItemType::new)
     );
 
-    protected BasicBlockItemType(BlockFactory block) {
-        super(block);
+    protected BasicBlockItemType(Rarity rarity, BlockFactory block) {
+        super(rarity, block);
     }
 
     @Override
-    public Codec<? extends BlockItemDefinitionType> codec() {
+    public Codec<? extends BlockItemDefinition> codec() {
         return CODEC;
     }
 

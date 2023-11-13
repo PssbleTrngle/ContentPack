@@ -11,10 +11,31 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+import java.util.WeakHashMap;
 import java.util.function.Supplier;
 
 @Mod(Constants.MOD_ID)
 public class ForgeEntrypoint {
+
+    private static final Map<ResourceKey<? extends Registry<?>>, Map<ResourceLocation, ?>> CACHE = new HashMap<>();
+
+    @SuppressWarnings("unchecked")
+    private static <T> void save(ResourceKey<Registry<T>> registry, ResourceLocation id, T value) {
+        var map = (Map<ResourceLocation, T>) CACHE.computeIfAbsent(registry, $ -> new WeakHashMap<ResourceLocation, T>());
+        map.put(id, value);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T getCached(ResourceKey<Registry<T>> registry, ResourceLocation id) {
+        Constants.LOGGER.debug("using cache for " + id);
+        return Optional.ofNullable(CACHE.get(registry))
+                .map(map -> (Map<ResourceLocation, T>) map)
+                .map(map -> map.get(id))
+                .orElseThrow();
+    }
 
     private static RegistryEvent createRegisterEvent(RegisterEvent event) {
         return new RegistryEvent() {
@@ -22,14 +43,12 @@ public class ForgeEntrypoint {
             public <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory) {
                 if (event.getRegistryKey().equals(registry)) {
                     var value = factory.get();
+                    save(registry, id, value);
                     event.register(registry, id, () -> value);
                     return () -> value;
                 } else {
-                    return () -> {
-                        throw new IllegalStateException();
-                    };
+                    return () -> getCached(registry, id);
                 }
-
             }
         };
     }

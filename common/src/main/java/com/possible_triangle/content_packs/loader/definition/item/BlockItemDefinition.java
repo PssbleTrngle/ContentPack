@@ -10,9 +10,10 @@ import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 
-public abstract class BlockItemDefinitionType extends ItemDefinitionType {
+public abstract class BlockItemDefinition extends ItemDefinition {
 
     private static final Codec<BlockFactory> BLOCK_CODEC = Codec.either(Registry.BLOCK.byNameCodec(), BlockDefinition.CODEC).xmap(it ->
                     it.<BlockFactory>map(
@@ -25,20 +26,19 @@ public abstract class BlockItemDefinitionType extends ItemDefinitionType {
             }
     );
 
-    public static <T extends BlockItemDefinitionType> Products.P1<RecordCodecBuilder.Mu<T>, BlockFactory> commonCodec(RecordCodecBuilder.Instance<T> builder) {
-        return builder.group(
-                BLOCK_CODEC.fieldOf("block").forGetter(it -> it.block)
-        );
+    public static <T extends BlockItemDefinition> Products.P2<RecordCodecBuilder.Mu<T>, Rarity, BlockFactory> blockItemCodec(RecordCodecBuilder.Instance<T> builder) {
+        return commonCodec(builder).and(BLOCK_CODEC.fieldOf("block").forGetter(it -> it.block));
     }
 
     protected final BlockFactory block;
 
-    protected BlockItemDefinitionType(BlockFactory block) {
+    protected BlockItemDefinition(Rarity rarity, BlockFactory block) {
+        super(rarity);
         this.block = block;
     }
 
     @Override
-    public abstract Codec<? extends BlockItemDefinitionType> codec();
+    public abstract Codec<? extends BlockItemDefinition> codec();
 
     protected abstract BlockItem create(ItemDefinition definition, Block block);
 
