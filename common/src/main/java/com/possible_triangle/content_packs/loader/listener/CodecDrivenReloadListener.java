@@ -41,8 +41,12 @@ public abstract class CodecDrivenReloadListener<T> extends SimpleJsonResourceRel
         var entries = new ImmutableMap.Builder<ResourceLocation, T>();
 
         elements.forEach((id, json) -> {
-            var result = codec.parse(ops, json).resultOrPartial(Constants.LOGGER::error);
-            result.ifPresent(value -> entries.put(id, value));
+            try {
+                var result = codec.parse(ops, json).resultOrPartial(Constants.LOGGER::error);
+                result.ifPresent(value -> entries.put(id, value));
+            } catch (Exception e) {
+                Constants.LOGGER.error("encountered an exception loading '{}': {}", id, e);
+            }
         });
 
         consume(entries.build());

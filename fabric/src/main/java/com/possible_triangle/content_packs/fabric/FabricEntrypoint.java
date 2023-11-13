@@ -1,5 +1,6 @@
-package com.possible_triangle.content_packs;
+package com.possible_triangle.content_packs.fabric;
 
+import com.possible_triangle.content_packs.CommonClass;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.DedicatedServerModInitializer;

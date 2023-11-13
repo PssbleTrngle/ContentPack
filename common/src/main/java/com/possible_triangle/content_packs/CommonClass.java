@@ -2,7 +2,6 @@ package com.possible_triangle.content_packs;
 
 import com.possible_triangle.content_packs.loader.ContentLoader;
 import com.possible_triangle.content_packs.loader.definition.block.BasicBlockType;
-import com.possible_triangle.content_packs.loader.definition.block.CogBlockType;
 import com.possible_triangle.content_packs.loader.definition.item.BasicBlockItemType;
 import com.possible_triangle.content_packs.loader.definition.item.BasicItemType;
 import com.possible_triangle.content_packs.loader.listener.BlockDefinitionListener;
@@ -27,12 +26,16 @@ public class CommonClass {
     }
 
     private static void registerAndLoad(ContentLoader loader, RegistryEvent event, RegistryAccess registryAccess) {
-        Constants.LOGGER.info("loading contentpacks");
+        Constants.LOGGER.info("loading content packs");
 
         // TODO call events
         loader.register(new BlockDefinitionListener(registryAccess, event));
         loader.register(new ItemDefinitionListener(registryAccess, event));
-        loader.load().done().join();
+
+        var reload = loader.load();
+        reload.done().thenRun(() -> {
+            Constants.LOGGER.debug("finished loading content packs");
+        }).join();
     }
 
     public static void serverInit(RegistryEvent event) {
@@ -48,7 +51,6 @@ public class CommonClass {
 
     public static void registerTypes(RegistryEvent event) {
         event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation("basic"), () -> BasicBlockType.CODEC);
-        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation("create", "cog"), () -> CogBlockType.CODEC);
 
         event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation("basic"), () -> BasicItemType.CODEC);
         event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation("block_item"), () -> BasicBlockItemType.CODEC);

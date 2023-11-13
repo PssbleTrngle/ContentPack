@@ -1,4 +1,4 @@
-package com.possible_triangle.content_packs.platform;
+package com.possible_triangle.content_packs.forge.platform;
 
 import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;

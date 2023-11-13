@@ -15,9 +15,9 @@
 
   "environment": "*",
   "entrypoints": {
-    "main": ["com.possible_triangle.content_packs.FabricEntrypoint"],
-    "server": ["com.possible_triangle.content_packs.FabricEntrypoint"],
-    "client": ["com.possible_triangle.content_packs.FabricEntrypoint"]
+    "main": ["com.possible_triangle.content_packs.fabric.FabricEntrypoint"],
+    "server": ["com.possible_triangle.content_packs.fabric.FabricEntrypoint"],
+    "client": ["com.possible_triangle.content_packs.fabric.FabricEntrypoint"]
   },
 
   "depends": {

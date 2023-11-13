@@ -23,8 +23,8 @@ public class BasicBlockItemType extends BlockItemDefinition {
     }
 
     @Override
-    public BlockItem create(ItemDefinition definition, Block block) {
-        return new BlockItem(block, definition.properties());
+    public BlockItem create(Block block) {
+        return new BlockItem(block, properties());
     }
 
 }

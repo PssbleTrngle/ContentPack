@@ -35,7 +35,7 @@ public abstract class ItemDefinition {
 
     public abstract Codec<? extends ItemDefinition> codec();
 
-    public abstract Item create(RegistryEvent event, ResourceLocation id, ItemDefinition definition);
+    protected abstract Item create(RegistryEvent event, ResourceLocation id);
 
     public Item.Properties properties() {
         return new Item.Properties().rarity(rarity);
@@ -44,7 +44,7 @@ public abstract class ItemDefinition {
     public final Supplier<Item> register(RegistryEvent event, ResourceLocation id) {
         return event.register(Registry.ITEM_REGISTRY, id, () -> {
             Constants.LOGGER.debug("registering item with id {}", id);
-            return create(event, id, this);
+            return create(event, id);
         });
     }
 }

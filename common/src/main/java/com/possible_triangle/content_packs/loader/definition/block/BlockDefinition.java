@@ -35,16 +35,16 @@ public abstract class BlockDefinition implements BlockFactory {
         this.material = material;
     }
 
-    abstract Codec<? extends BlockDefinition> codec();
+    public abstract Codec<? extends BlockDefinition> codec();
 
-    public abstract Block create(RegistryEvent event, ResourceLocation id, BlockDefinition definition);
+    protected abstract Block create(RegistryEvent event, ResourceLocation id);
 
     public BlockBehaviour.Properties properties() {
         return BlockBehaviour.Properties.of(material);
     }
 
     @Override
-    public Block create(RegistryEvent event, ResourceLocation id) {
+    public final Block createAndRegister(RegistryEvent event, ResourceLocation id) {
         Objects.requireNonNull(id);
         return this.register(event, id).get();
     }
@@ -52,7 +52,7 @@ public abstract class BlockDefinition implements BlockFactory {
     public final Supplier<Block> register(RegistryEvent event, ResourceLocation id) {
         return event.register(Registry.BLOCK_REGISTRY, id, () -> {
             Constants.LOGGER.debug("registering block with id {}", id);
-            return create(event, id, this);
+            return create(event, id);
         });
     }
 

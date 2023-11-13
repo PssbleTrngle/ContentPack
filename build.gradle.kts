@@ -28,6 +28,7 @@ subprojects {
             url = uri("https://maven.blamejared.com/")
             content {
                 includeGroup("mezz.jei")
+                includeGroup("vazkii.botania")
             }
         }
 

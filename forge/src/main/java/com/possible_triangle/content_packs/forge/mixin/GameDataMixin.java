@@ -1,4 +1,4 @@
-package com.possible_triangle.content_packs.mixin.forge;
+package com.possible_triangle.content_packs.forge.mixin;
 
 import com.possible_triangle.content_packs.Registries;
 import net.minecraft.resources.ResourceLocation;

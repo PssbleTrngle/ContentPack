@@ -7,6 +7,6 @@ import net.minecraft.world.level.block.Block;
 @FunctionalInterface
 public interface BlockFactory {
 
-    Block create(RegistryEvent event, ResourceLocation id);
+    Block createAndRegister(RegistryEvent event, ResourceLocation id);
 
 }

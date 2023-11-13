@@ -6,6 +6,7 @@ val registrate_forge_version: String by extra
 val create_forge_version: String by extra
 val jei_version: String by extra
 val flywheel_version: String by extra
+val botania_forge_version: String by extra
 
 forge {
     enableMixins()
@@ -28,6 +29,8 @@ dependencies {
     modImplementation("com.simibubi.create:create-${mc_version}:${create_forge_version}:slim") {
         isTransitive = false
     }
+
+    modImplementation("vazkii.botania:Botania:${botania_forge_version}")
 
     if (!env.isCI) {
         modRuntimeOnly("com.tterrag.registrate:Registrate:${registrate_forge_version}")

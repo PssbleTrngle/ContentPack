@@ -1,19 +1,22 @@
-package com.possible_triangle.content_packs.loader.definition.item;
+package com.possible_triangle.content_packs.forge.compat.botania;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.possible_triangle.content_packs.loader.definition.item.ItemDefinition;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
+import vazkii.botania.common.item.material.RuneItem;
 
-public class BasicItemType extends ItemDefinition {
+public class RuneItemType extends ItemDefinition {
 
-    public static final Codec<BasicItemType> CODEC = RecordCodecBuilder.create(builder ->
-        ItemDefinition.commonCodec(builder).apply(builder, BasicItemType::new)
+    public static final Codec<RuneItemType> CODEC = RecordCodecBuilder.create(builder ->
+            commonCodec(builder).apply(builder, RuneItemType::new)
     );
 
-    protected BasicItemType(Rarity rarity) {
+
+    protected RuneItemType(Rarity rarity) {
         super(rarity);
     }
 
@@ -24,7 +27,6 @@ public class BasicItemType extends ItemDefinition {
 
     @Override
     protected Item create(RegistryEvent event, ResourceLocation id) {
-        return new Item(properties());
+        return new RuneItem(properties());
     }
-
 }

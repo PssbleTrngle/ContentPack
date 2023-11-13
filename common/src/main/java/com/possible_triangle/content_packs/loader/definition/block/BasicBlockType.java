@@ -23,8 +23,8 @@ public class BasicBlockType extends BlockDefinition {
     }
 
     @Override
-    public Block create(RegistryEvent event, ResourceLocation id, BlockDefinition definition) {
-        return new Block(definition.properties());
+    protected Block create(RegistryEvent event, ResourceLocation id) {
+        return new Block(properties());
     }
 
 }

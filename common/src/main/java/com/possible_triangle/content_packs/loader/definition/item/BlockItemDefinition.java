@@ -22,7 +22,7 @@ public abstract class BlockItemDefinition extends ItemDefinition {
                     ),
             factory -> {
                 if (factory instanceof BlockDefinition definition) return Either.right(definition);
-                return Either.left(factory.create(null, null));
+                return Either.left(factory.createAndRegister(null, null));
             }
     );
 
@@ -40,11 +40,11 @@ public abstract class BlockItemDefinition extends ItemDefinition {
     @Override
     public abstract Codec<? extends BlockItemDefinition> codec();
 
-    protected abstract BlockItem create(ItemDefinition definition, Block block);
+    protected abstract BlockItem create(Block block);
 
     @Override
-    public final BlockItem create(RegistryEvent event, ResourceLocation id, ItemDefinition definition) {
-        return create(definition, block.create(event, id));
+    protected final BlockItem create(RegistryEvent event, ResourceLocation id) {
+        return create(block.createAndRegister(event, id));
     }
 
 }

@@ -1,4 +1,4 @@
-package com.possible_triangle.content_packs.platform;
+package com.possible_triangle.content_packs.fabric.platform;
 
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
