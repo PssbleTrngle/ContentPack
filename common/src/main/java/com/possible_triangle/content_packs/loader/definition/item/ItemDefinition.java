@@ -10,7 +10,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -21,25 +20,21 @@ public abstract class ItemDefinition {
             Registries.ITEM_TYPES.byNameCodec().dispatchStable(ItemDefinition::codec, Function.identity())
     );
 
-    public static <T extends ItemDefinition> Products.P1<RecordCodecBuilder.Mu<T>, Rarity> commonCodec(RecordCodecBuilder.Instance<T> builder) {
+    public static <T extends ItemDefinition> Products.P1<RecordCodecBuilder.Mu<T>, ItemProperties> commonCodec(RecordCodecBuilder.Instance<T> builder) {
         return builder.group(
-                RarityCodec.CODEC.optionalFieldOf("rarity", Rarity.COMMON).forGetter(it -> it.rarity)
+                ItemProperties.CODEC.optionalFieldOf("properties", ItemProperties.DEFAULT).forGetter(it -> it.properties)
         );
     }
 
-    protected final Rarity rarity;
+    protected final ItemProperties properties;
 
-    protected ItemDefinition(Rarity rarity) {
-        this.rarity = rarity;
+    protected ItemDefinition(ItemProperties properties) {
+        this.properties = properties;
     }
 
     public abstract Codec<? extends ItemDefinition> codec();
 
     protected abstract Item create(RegistryEvent event, ResourceLocation id);
-
-    public Item.Properties properties() {
-        return new Item.Properties().rarity(rarity);
-    }
 
     public final Supplier<Item> register(RegistryEvent event, ResourceLocation id) {
         return event.register(Registry.ITEM_REGISTRY, id, () -> {

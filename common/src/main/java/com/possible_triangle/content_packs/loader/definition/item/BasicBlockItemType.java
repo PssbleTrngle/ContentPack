@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.loader.definition.block.BlockFactory;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 
 public class BasicBlockItemType extends BlockItemDefinition {
@@ -13,8 +12,8 @@ public class BasicBlockItemType extends BlockItemDefinition {
             blockItemCodec(builder).apply(builder, BasicBlockItemType::new)
     );
 
-    protected BasicBlockItemType(Rarity rarity, BlockFactory block) {
-        super(rarity, block);
+    protected BasicBlockItemType(ItemProperties properties, BlockFactory block) {
+        super(properties, block);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class BasicBlockItemType extends BlockItemDefinition {
 
     @Override
     public BlockItem create(Block block) {
-        return new BlockItem(block, properties());
+        return new BlockItem(block, properties.create());
     }
 
 }

@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 
 public class BasicItemType extends ItemDefinition {
 
@@ -13,8 +12,8 @@ public class BasicItemType extends ItemDefinition {
         ItemDefinition.commonCodec(builder).apply(builder, BasicItemType::new)
     );
 
-    protected BasicItemType(Rarity rarity) {
-        super(rarity);
+    protected BasicItemType(ItemProperties properties) {
+        super(properties);
     }
 
     @Override
@@ -24,7 +23,7 @@ public class BasicItemType extends ItemDefinition {
 
     @Override
     protected Item create(RegistryEvent event, ResourceLocation id) {
-        return new Item(properties());
+        return new Item(properties.create());
     }
 
 }

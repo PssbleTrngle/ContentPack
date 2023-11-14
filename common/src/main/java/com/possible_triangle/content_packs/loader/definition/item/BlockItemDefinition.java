@@ -10,7 +10,6 @@ import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
 
 public abstract class BlockItemDefinition extends ItemDefinition {
@@ -26,14 +25,14 @@ public abstract class BlockItemDefinition extends ItemDefinition {
             }
     );
 
-    public static <T extends BlockItemDefinition> Products.P2<RecordCodecBuilder.Mu<T>, Rarity, BlockFactory> blockItemCodec(RecordCodecBuilder.Instance<T> builder) {
+    public static <T extends BlockItemDefinition> Products.P2<RecordCodecBuilder.Mu<T>, ItemProperties, BlockFactory> blockItemCodec(RecordCodecBuilder.Instance<T> builder) {
         return commonCodec(builder).and(BLOCK_CODEC.fieldOf("block").forGetter(it -> it.block));
     }
 
     protected final BlockFactory block;
 
-    protected BlockItemDefinition(Rarity rarity, BlockFactory block) {
-        super(rarity);
+    protected BlockItemDefinition(ItemProperties properties, BlockFactory block) {
+        super(properties);
         this.block = block;
     }
 

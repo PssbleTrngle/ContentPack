@@ -1,3 +1,6 @@
 {
-  "type": "basic"
+  "type": "basic",
+  "properties": {
+    "rarity": "rare"
+  }
 }
