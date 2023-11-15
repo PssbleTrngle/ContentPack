@@ -2,6 +2,8 @@ package com.possible_triangle.content_packs.forge;
 
 import com.possible_triangle.content_packs.CommonClass;
 import com.possible_triangle.content_packs.Constants;
+import com.possible_triangle.content_packs.forge.compat.CompatMods;
+import com.possible_triangle.content_packs.forge.compat.botania.BotaniaCompat;
 import com.possible_triangle.content_packs.forge.compat.create.CreateCompat;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.core.Registry;
@@ -39,12 +41,16 @@ public class ForgeEntrypoint {
     public ForgeEntrypoint() {
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        CompatMods.ifLoaded(CompatMods.CREATE, () -> CreateCompat.init(modBus));
+
         CommonClass.load();
 
         modBus.addListener((RegisterEvent event) -> {
             var wrapped = createRegisterEvent(event);
             CommonClass.registerTypes(wrapped);
-            CreateCompat.init(wrapped);
+
+            CompatMods.ifLoaded(CompatMods.CREATE, () -> CreateCompat.register(wrapped));
+            CompatMods.ifLoaded(CompatMods.BOTANIA, () -> BotaniaCompat.register(wrapped));
         });
 
         modBus.addListener(EventPriority.LOWEST, (RegisterEvent event) -> {

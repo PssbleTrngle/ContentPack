@@ -1,4 +1,4 @@
-package com.possible_triangle.content_packs.forge.compat.create;
+package com.possible_triangle.content_packs.forge.compat.create.cog;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

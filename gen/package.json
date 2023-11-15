@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "node index.mjs"
+  },
+  "dependencies": {
+    "@pssbletrngle/data-modifier": "^0.2.0",
+    "@pssbletrngle/resource-merger": "^1.2.4"
+  }
+}

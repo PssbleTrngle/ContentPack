@@ -1,0 +1,9 @@
+{
+  "type": "create:cog",
+  "block": {
+    "type": "create:cog",
+    "large": true,
+    "properties": { "material": "metal", "strength": 2 }
+  },
+  "properties": {}
+}

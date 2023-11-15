@@ -19,7 +19,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 import java.util.stream.Stream;
 
-public class ContentLoader  {
+public class ContentLoader {
 
     private static final CompletableFuture<Unit> INITIAL_TASK = CompletableFuture.completedFuture(Unit.INSTANCE);
 
@@ -27,9 +27,11 @@ public class ContentLoader  {
         return Stream.of(new FolderRepositorySource(directory, PackSource.DEFAULT));
     }
 
-    private final Executor executor;
-    private final ReloadableResourceManager manager = new ReloadableResourceManager(PackType.SERVER_DATA);
+    private static final PackType TYPE = PackType.valueOf("CONTENT");
 
+    private final ReloadableResourceManager manager = new ReloadableResourceManager(TYPE);
+
+    private final Executor executor;
     private final PackRepository packRepository;
 
     public ContentLoader(Executor executor, File directory) {
