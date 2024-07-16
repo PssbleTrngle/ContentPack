@@ -40,11 +40,5 @@ subprojects {
             }
         }
     }
-
-    enablePublishing {
-        repositories {
-           // githubPackages(this@subprojects)
-        }
-    }
 }
 
