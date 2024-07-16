@@ -3,6 +3,7 @@ package com.possible_triangle.content_packs.forge.compat.create;
 import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.Registries;
 import com.possible_triangle.content_packs.forge.compat.CompatMods;
+import com.possible_triangle.content_packs.forge.compat.VerticalSlabBlockType;
 import com.possible_triangle.content_packs.forge.compat.create.cog.CogBlockType;
 import com.possible_triangle.content_packs.forge.compat.create.cog.CogItemType;
 import com.possible_triangle.content_packs.forge.compat.create.cog.CustomCogInstance;
@@ -38,6 +39,7 @@ public class CreateCompat {
 
     public static void register(RegistryEvent event) {
         event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "cog"), () -> CogBlockType.CODEC);
+        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation(CompatMods.MOONLIGHT.modid, "vertical_slab"), () -> VerticalSlabBlockType.CODEC);
         event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "cog"), () -> CogItemType.CODEC);
         event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "transition_item"), () -> TransitionItemType.CODEC);
     }

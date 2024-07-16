@@ -5,7 +5,8 @@ import net.minecraftforge.fml.ModList;
 public enum CompatMods {
 
     CREATE("create"),
-    BOTANIA("botania");
+    BOTANIA("botania"),
+    MOONLIGHT("moonlight");
 
     public final String modid;
 

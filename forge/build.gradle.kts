@@ -3,12 +3,12 @@ import org.spongepowered.asm.gradle.plugins.MixinExtension
 
 val mod_id: String by extra
 val mc_version: String by extra
-val moonlight_forge_version: String by extra
 val registrate_forge_version: String by extra
 val create_forge_version: String by extra
 val jei_version: String by extra
 val flywheel_version: String by extra
 val botania_forge_version: String by extra
+val moonlight_forge_version: String by extra
 
 forge {
     enableMixins()
@@ -31,7 +31,6 @@ configure<MixinExtension> {
 }
 
 dependencies {
-    // modImplementation("maven.modrinth:moonlight:${moonlight_forge_version}")
     modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
     modImplementation("com.jozufozu.flywheel:flywheel-forge-${mc_version}:${flywheel_version}")
     modImplementation("com.simibubi.create:create-${mc_version}:${create_forge_version}:slim") {
@@ -39,6 +38,7 @@ dependencies {
     }
 
     modCompileOnly("vazkii.botania:Botania:${botania_forge_version}")
+    modCompileOnly("maven.modrinth:moonlight:${moonlight_forge_version}")
 
     if (!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-forge:${jei_version}")

@@ -8,15 +8,15 @@ import com.possible_triangle.content_packs.loader.listener.BlockDefinitionListen
 import com.possible_triangle.content_packs.loader.listener.ItemDefinitionListener;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ReloadInstance;
 
 import java.io.File;
 
 public class CommonClass {
 
-    private static final String PACK_FOLDER = "contentpacks";
+    public static final String PACK_FOLDER = "contentpacks";
 
     //  private static final RegistryAccess REGISTRY_ACCESS = RegistryAccess.builtinCopy();
     private static final RegistryAccess REGISTRY_ACCESS = null;
@@ -25,7 +25,7 @@ public class CommonClass {
         Registries.load();
     }
 
-    private static void registerAndLoad(ContentLoader loader, RegistryEvent event, RegistryAccess registryAccess) {
+    static ReloadInstance registerAndLoad(ContentLoader loader, RegistryEvent event, RegistryAccess registryAccess) {
         Constants.LOGGER.info("loading content packs");
 
         // TODO call events
@@ -34,19 +34,15 @@ public class CommonClass {
 
         var reload = loader.load();
         reload.done().thenRun(() -> {
-            Constants.LOGGER.debug("finished loading content packs");
-        }).join();
+            Constants.LOGGER.info("finished loading content packs");
+        });
+        return reload;
     }
 
     public static void serverInit(RegistryEvent event) {
         var loader = new ContentLoader(Util.backgroundExecutor(), new File(".", PACK_FOLDER));
-        registerAndLoad(loader, event, REGISTRY_ACCESS);
-    }
-
-    public static void clientInit(RegistryEvent event) {
-        var minecraft = Minecraft.getInstance();
-        var loader = new ContentLoader(minecraft, new File(minecraft.gameDirectory, PACK_FOLDER));
-        registerAndLoad(loader, event, REGISTRY_ACCESS);
+        var reload = registerAndLoad(loader, event, REGISTRY_ACCESS);
+        reload.done().join();
     }
 
     public static void registerTypes(RegistryEvent event) {

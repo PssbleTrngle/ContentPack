@@ -1,5 +1,6 @@
 package com.possible_triangle.content_packs.fabric;
 
+import com.possible_triangle.content_packs.ClientClass;
 import com.possible_triangle.content_packs.CommonClass;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.fabricmc.api.ClientModInitializer;
@@ -31,7 +32,7 @@ public class FabricEntrypoint implements ModInitializer, DedicatedServerModIniti
 
     @Override
     public void onInitializeClient() {
-        CommonClass.clientInit(REGISTER_EVENT);
+        ClientClass.clientInit(REGISTER_EVENT);
     }
 
     @Override

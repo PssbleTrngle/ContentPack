@@ -1,5 +1,6 @@
 package com.possible_triangle.content_packs.forge;
 
+import com.possible_triangle.content_packs.ClientClass;
 import com.possible_triangle.content_packs.CommonClass;
 import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
@@ -23,25 +24,30 @@ public class ForgeRegistryCache implements RegistryEvent {
     }
 
     private final Set<FactoryEntry<?>> factories = new HashSet<>();
+    private boolean loaded;
 
     public void register(RegisterEvent event) {
         if (event.getRegistryKey().location().getNamespace().equals(Constants.MOD_ID)) return;
 
-        if (factories.isEmpty()) load();
-
-        factories.forEach(it -> it.register(event));
+        if (!loaded) load();
+        synchronized (factories) {
+            factories.forEach(it -> it.register(event));
+        }
     }
 
     @Override
     public <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory) {
         var value = factory.get();
-        factories.add(new FactoryEntry<>(registry, id, value));
+        synchronized (factories) {
+            factories.add(new FactoryEntry<>(registry, id, value));
+        }
         return () -> value;
     }
 
     private void load() {
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> CommonClass.clientInit(this));
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientClass.clientInit(this));
         DistExecutor.unsafeRunWhenOn(Dist.DEDICATED_SERVER, () -> () -> CommonClass.serverInit(this));
+        loaded = true;
     }
 
 }
