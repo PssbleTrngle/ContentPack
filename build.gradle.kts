@@ -40,5 +40,9 @@ subprojects {
             }
         }
     }
+
+    enablePublishing {
+        githubPackages()
+    }
 }
 
