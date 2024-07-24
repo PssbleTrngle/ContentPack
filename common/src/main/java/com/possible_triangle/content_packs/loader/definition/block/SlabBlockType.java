@@ -5,15 +5,15 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.SlabBlock;
 
-public class BasicBlockType extends BlockDefinition {
+public class SlabBlockType extends BlockDefinition {
 
-    public static final Codec<BasicBlockType> CODEC = RecordCodecBuilder.create(builder ->
-        commonCodec(builder).apply(builder, BasicBlockType::new)
+    public static final Codec<SlabBlockType> CODEC = RecordCodecBuilder.create(builder ->
+        commonCodec(builder).apply(builder, SlabBlockType::new)
     );
 
-    protected BasicBlockType(BlockProperties properties) {
+    protected SlabBlockType(BlockProperties properties) {
         super(properties);
     }
 
@@ -24,7 +24,7 @@ public class BasicBlockType extends BlockDefinition {
 
     @Override
     protected Block create(RegistryEvent event, ResourceLocation id) {
-        return new Block(properties.create());
+        return new SlabBlock(properties.create());
     }
 
 }

@@ -13,8 +13,8 @@ public class CogBlockType extends BlockDefinition {
 
     public static final Codec<CogBlockType> CODEC = RecordCodecBuilder.create(builder ->
             commonCodec(builder)
-                    .and(Codec.BOOL.optionalFieldOf("large", false).forGetter(it -> it.large)
-                    ).apply(builder, CogBlockType::new)
+                    .and(Codec.BOOL.optionalFieldOf("large", false).forGetter(it -> it.large))
+                    .apply(builder, CogBlockType::new)
     );
 
     private final boolean large;

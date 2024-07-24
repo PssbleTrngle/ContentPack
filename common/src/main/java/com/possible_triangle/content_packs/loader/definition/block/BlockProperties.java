@@ -9,17 +9,16 @@ public record BlockProperties(
         Material material,
         float strength,
         int lightLevel,
-        boolean collission,
+        boolean collisions,
         boolean requiresCorrectToolForDrops
 ) {
     public BlockBehaviour.Properties create() {
         var properties = BlockBehaviour.Properties.of(material)
                 .strength(strength)
-                .lightLevel($ -> lightLevel)
-                .requiresCorrectToolForDrops();
+                .lightLevel($ -> lightLevel);
 
         if (requiresCorrectToolForDrops) properties.requiresCorrectToolForDrops();
-        if (!collission) properties.noCollission();
+        if (!collisions) properties.noCollission();
 
         return properties;
     }
@@ -30,7 +29,7 @@ public record BlockProperties(
                     MaterialCodec.CODEC.fieldOf("material").forGetter(BlockProperties::material),
                     Codec.FLOAT.fieldOf("strength").forGetter(BlockProperties::strength),
                     Codec.INT.optionalFieldOf("light", 0).forGetter(BlockProperties::lightLevel),
-                    Codec.BOOL.optionalFieldOf("collission", true).forGetter(BlockProperties::collission),
+                    Codec.BOOL.optionalFieldOf("collision", true).forGetter(BlockProperties::collisions),
                     Codec.BOOL.optionalFieldOf("requires_correct_tool", false).forGetter(BlockProperties::requiresCorrectToolForDrops)
             ).apply(builder, BlockProperties::new)
     );
