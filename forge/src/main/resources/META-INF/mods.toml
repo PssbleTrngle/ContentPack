@@ -10,7 +10,7 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="${mod_author}"
 description='''
-Allows easy customization of villager trades using datapacks
+Data-driven item/block creation
 '''
 
 [[dependencies.${mod_id}]]
