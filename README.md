@@ -7,8 +7,8 @@
 # Content Packs
 
 [![Release](https://img.shields.io/github/v/release/PssbleTrngle/ContentPack?label=Version&sort=semver)][DOWNLOAD]
-[![Issues](https://img.shields.io/github/issues/PssbleTrngle/DataTrades?label=Issues)][ISSUES]
-[![Modrinth](https://img.shields.io/modrinth/dt/nm1MuVrD?color=green&logo=modrinth&logoColor=green)][MODRINTH]
+[![Issues](https://img.shields.io/github/issues/PssbleTrngle/ContentPack?label=Issues)][ISSUES]
+[![Modrinth](https://img.shields.io/modrinth/dt/qwwknqGD?color=green&logo=modrinth&logoColor=green)][MODRINTH]
 
 <!-- modrinth_exclude.end -->
 
