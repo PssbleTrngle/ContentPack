@@ -4,7 +4,7 @@
 
 [MODRINTH]: https://modrinth.com/project/content-packs
 
-# Content Packs
+# Content Packs <!-- modrinth_exclude.start --> <img src="https://raw.githubusercontent.com/PssbleTrngle/ContentPack/1.19.x/common/src/main/resources/assets/content_packs/icon.svg" align="right" height="128" />
 
 [![Release](https://img.shields.io/github/v/release/PssbleTrngle/ContentPack?label=Version&sort=semver)][DOWNLOAD]
 [![Issues](https://img.shields.io/github/issues/PssbleTrngle/ContentPack?label=Issues)][ISSUES]
