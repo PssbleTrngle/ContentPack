@@ -3,6 +3,7 @@ package com.possible_triangle.content_packs.forge;
 import com.possible_triangle.content_packs.CommonClass;
 import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.forge.compat.CompatMods;
+import com.possible_triangle.content_packs.forge.compat.MoonlightCompat;
 import com.possible_triangle.content_packs.forge.compat.botania.BotaniaCompat;
 import com.possible_triangle.content_packs.forge.compat.create.CreateCompat;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
@@ -51,6 +52,7 @@ public class ForgeEntrypoint {
 
             CompatMods.ifLoaded(CompatMods.CREATE, () -> CreateCompat.register(wrapped));
             CompatMods.ifLoaded(CompatMods.BOTANIA, () -> BotaniaCompat.register(wrapped));
+            CompatMods.ifLoaded(CompatMods.MOONLIGHT, () -> MoonlightCompat.register(wrapped));
         });
 
         modBus.addListener(EventPriority.LOWEST, (RegisterEvent event) -> {
