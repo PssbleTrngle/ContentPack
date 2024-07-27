@@ -1,6 +1,5 @@
 package com.possible_triangle.content_packs.loader;
 
-import com.possible_triangle.content_packs.platform.Services;
 import net.minecraft.server.packs.PackResources;
 import net.minecraft.server.packs.PackType;
 import net.minecraft.server.packs.repository.FolderRepositorySource;
@@ -23,7 +22,7 @@ public class ContentLoader {
     private static final CompletableFuture<Unit> INITIAL_TASK = CompletableFuture.completedFuture(Unit.INSTANCE);
 
     private static Stream<RepositorySource> createDefaultSources(File directory) {
-        return Stream.of(new FolderRepositorySource(directory, PackSource.DEFAULT));
+        return Stream.of(new FolderRepositorySource(directory.toPath(), PackType.SERVER_DATA, PackSource.DEFAULT));
     }
 
     private static final PackType TYPE = PackType.valueOf("CONTENT");
@@ -35,7 +34,7 @@ public class ContentLoader {
 
     public ContentLoader(Executor executor, File directory) {
         this.executor = executor;
-        this.packRepository = new PackRepository(Services.PLATFORM.createPackConstructor(), createDefaultSources(directory).toArray(RepositorySource[]::new));
+        this.packRepository = new PackRepository(createDefaultSources(directory).toArray(RepositorySource[]::new));
     }
 
     public void register(PreparableReloadListener listener) {

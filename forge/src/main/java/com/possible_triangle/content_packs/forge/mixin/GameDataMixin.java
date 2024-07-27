@@ -1,6 +1,6 @@
 package com.possible_triangle.content_packs.forge.mixin;
 
-import com.possible_triangle.content_packs.Registries;
+import com.possible_triangle.content_packs.ModRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.registries.GameData;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,7 +18,7 @@ public class GameDataMixin {
             at = @At(value = "NEW", target = "(Ljava/util/Collection;)Ljava/util/LinkedHashSet;")
     )
     private static LinkedHashSet<ResourceLocation> injected(Collection<ResourceLocation> vanillaRegistries) {
-        var set = new LinkedHashSet<>(Registries.Keys.getPriorityKeys());
+        var set = new LinkedHashSet<>(ModRegistries.Keys.getPriorityKeys());
         set.addAll(vanillaRegistries);
         return set;
     }

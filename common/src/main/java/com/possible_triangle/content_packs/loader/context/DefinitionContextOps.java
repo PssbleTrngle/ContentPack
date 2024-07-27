@@ -21,7 +21,7 @@ public class DefinitionContextOps<T> extends DelegatingOps<T> {
             if (ops instanceof DefinitionContextOps<?> contextOps) {
                 return DataResult.success(contextOps.context);
             } else {
-                return DataResult.error("Not a context ops");
+                return DataResult.error(() -> "Not a context ops");
             }
         });
     }

@@ -3,18 +3,21 @@ package com.possible_triangle.content_packs.platform.services;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+
+import java.util.function.Supplier;
 
 
 public interface IPlatformHelper {
 
-    <T> RegistryCodecSupplier<T> createRegistry(Class<T> clazz,ResourceKey<Registry<T>> key);
+    <T> RegistryCodecSupplier<T> createRegistry(ResourceKey<Registry<T>> key);
 
     @FunctionalInterface
     interface RegistryCodecSupplier<T> {
         Codec<T> byNameCodec();
     }
 
-    Pack.PackConstructor createPackConstructor();
+    void addToTab(ResourceKey<CreativeModeTab> tab, Supplier<ItemStack> supplier);
 
 }

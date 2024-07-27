@@ -7,6 +7,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 
@@ -18,7 +19,7 @@ public class FabricEntrypoint implements ModInitializer, DedicatedServerModIniti
         @SuppressWarnings("unchecked")
         @Override
         public <T> Supplier<T> register(ResourceKey<Registry<T>> registryKey, ResourceLocation id, Supplier<T> factory) {
-            var registryRegistry = (Registry<Registry<T>>) Registry.REGISTRY;
+            var registryRegistry = (Registry<Registry<T>>) BuiltInRegistries.REGISTRY;
             var registry = registryRegistry.getOrThrow(registryKey);
             var created = Registry.register(registry, id, factory.get());
             return () -> created;

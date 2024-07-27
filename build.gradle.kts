@@ -6,6 +6,7 @@ plugins {
 subprojects {
     repositories {
         modrinthMaven()
+        curseMaven()
 
         maven {
             url = uri("https://mvn.devos.one/snapshots/")

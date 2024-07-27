@@ -13,7 +13,7 @@ public class RarityCodec {
             var rarity = Rarity.valueOf(key);
             return DataResult.success(rarity);
         } catch (IllegalArgumentException ex) {
-            return DataResult.error("unknown rarity '" + key + "'");
+            return DataResult.error(() -> "unknown rarity '" + key + "'");
         }
     }, rarity -> DataResult.success(rarity.toString().toLowerCase(Locale.ROOT)));
 

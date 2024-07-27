@@ -2,7 +2,6 @@ package com.possible_triangle.content_packs.loader.definition.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
 
@@ -24,8 +23,7 @@ public record ItemProperties(Rarity rarity, Optional<Integer> stackSize, Optiona
 
     public Item.Properties create() {
         var properties = new Item.Properties()
-                .rarity(rarity)
-                .tab(CreativeModeTab.TAB_SEARCH);
+                .rarity(rarity);
 
         stackSize.ifPresent(properties::stacksTo);
         durablity.ifPresent(properties::durability);

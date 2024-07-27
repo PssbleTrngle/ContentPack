@@ -20,18 +20,18 @@ public class PackTypeMixin {
     @Mutable
     private static PackType[] $VALUES;
 
-    private static final PackType CONTENT = packTypeExpansion$addVariant("content", com.mojang.bridge.game.PackType.DATA);
+    private static final PackType CONTENT = packTypeExpansion$addVariant("content", PackType.SERVER_DATA);
 
     @Invoker("<init>")
-    public static PackType packTypeExpansion$invokeInit(String internalName, int internalId, String directory, com.mojang.bridge.game.PackType type) {
+    public static PackType packTypeExpansion$invokeInit(String internalName, int internalId, String directory) {
         throw new AssertionError();
     }
 
     @Unique
-    private static PackType packTypeExpansion$addVariant(String directory, com.mojang.bridge.game.PackType type) {
+    private static PackType packTypeExpansion$addVariant(String directory, PackType type) {
         var variants = new ArrayList<>(Arrays.asList($VALUES));
         var  ordinal = variants.get(variants.size() - 1).ordinal() + 1;
-        var created = packTypeExpansion$invokeInit(directory.toUpperCase(Locale.ROOT), ordinal, directory, type);
+        var created = packTypeExpansion$invokeInit(directory.toUpperCase(Locale.ROOT), ordinal, directory);
         variants.add(created);
         $VALUES = variants.toArray(new PackType[0]);
         return created;

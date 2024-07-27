@@ -4,9 +4,9 @@ import com.mojang.datafixers.Products;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.Constants;
-import com.possible_triangle.content_packs.Registries;
+import com.possible_triangle.content_packs.ModRegistries;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.level.block.Block;
@@ -18,7 +18,7 @@ import java.util.function.Supplier;
 public abstract class BlockDefinition implements BlockFactory {
 
     public static final Codec<BlockDefinition> CODEC = ExtraCodecs.lazyInitializedCodec(() -> {
-        return Registries.BLOCK_TYPES.byNameCodec().dispatchStable(BlockDefinition::codec, Function.identity());
+        return ModRegistries.BLOCK_TYPES.byNameCodec().dispatchStable(BlockDefinition::codec, Function.identity());
     });
 
     public static <T extends BlockDefinition> Products.P1<RecordCodecBuilder.Mu<T>, BlockProperties> commonCodec(RecordCodecBuilder.Instance<T> builder) {
@@ -44,7 +44,7 @@ public abstract class BlockDefinition implements BlockFactory {
     }
 
     public final Supplier<Block> register(RegistryEvent event, ResourceLocation id) {
-        return event.register(Registry.BLOCK_REGISTRY, id, () -> {
+        return event.register(Registries.BLOCK, id, () -> {
             Constants.LOGGER.debug("registering block with id {}", id);
             return create(event, id);
         });

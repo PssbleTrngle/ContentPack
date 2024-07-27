@@ -8,7 +8,7 @@ val create_forge_version: String by extra
 val jei_version: String by extra
 val flywheel_version: String by extra
 val botania_forge_version: String by extra
-val moonlight_forge_version: String by extra
+val vslab_forge_version: String by extra
 
 forge {
     enableMixins()
@@ -38,7 +38,7 @@ dependencies {
     }
 
     modCompileOnly("vazkii.botania:Botania:${botania_forge_version}")
-    modCompileOnly("maven.modrinth:moonlight:${moonlight_forge_version}")
+    modCompileOnly("curse.maven:vertical-slabs-compat-724387:${vslab_forge_version}")
 
     if (!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-forge:${jei_version}")
