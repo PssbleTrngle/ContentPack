@@ -18,9 +18,4 @@ public class FabricPlatformHelper implements IPlatformHelper {
         return registry::byNameCodec;
     }
 
-    @Override
-    public void addToTab(ResourceKey<CreativeModeTab> tab, Supplier<ItemStack> supplier) {
-        ItemGroupEvents.modifyEntriesEvent(tab)
-                .register(entries -> entries.accept(supplier.get()));
-    }
 }

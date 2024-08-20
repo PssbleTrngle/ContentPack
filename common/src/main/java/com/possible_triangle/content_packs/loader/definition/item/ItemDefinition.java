@@ -6,7 +6,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.ModRegistries;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
-import com.possible_triangle.content_packs.platform.Services;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -43,13 +42,11 @@ public abstract class ItemDefinition {
     protected abstract Item create(RegistryEvent event, ResourceLocation id);
 
     public final Supplier<Item> register(RegistryEvent event, ResourceLocation id) {
-        var registered = event.register(Registries.ITEM, id, () -> {
+        return event.register(Registries.ITEM, id, () -> {
             Constants.LOGGER.debug("registering item with id {}", id);
-            return create(event, id);
+            var registered = create(event, id);
+            event.addToTab(TAB_KEY, () -> new ItemStack(registered));
+            return registered;
         });
-
-        Services.PLATFORM.addToTab(TAB_KEY, () -> new ItemStack(registered.get()));
-
-        return registered;
     }
 }

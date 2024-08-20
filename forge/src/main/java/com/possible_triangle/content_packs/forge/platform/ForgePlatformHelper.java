@@ -6,7 +6,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.NewRegistryEvent;
@@ -38,14 +37,6 @@ public class ForgePlatformHelper implements IPlatformHelper {
     public <T> RegistryCodecSupplier<T> createRegistry(ResourceKey<Registry<T>> key) {
         var builder = new RegistryBuilder<T>().setName(key.location());
         return new RegistryDelegate<>(builder);
-    }
-
-    @Override
-    public void addToTab(ResourceKey<CreativeModeTab> tab, Supplier<ItemStack> supplier) {
-        var bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.addListener((BuildCreativeModeTabContentsEvent event) -> {
-            event.accept(supplier.get(), CreativeModeTab.TabVisibility.SEARCH_TAB_ONLY);
-        });
     }
 
 }

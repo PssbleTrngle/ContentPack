@@ -18,6 +18,4 @@ public interface IPlatformHelper {
         Codec<T> byNameCodec();
     }
 
-    void addToTab(ResourceKey<CreativeModeTab> tab, Supplier<ItemStack> supplier);
-
 }

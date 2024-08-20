@@ -10,6 +10,8 @@ import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -20,7 +22,9 @@ import java.util.function.Supplier;
 @Mod(Constants.MOD_ID)
 public class ForgeEntrypoint {
 
-    private static RegistryEvent createRegisterEvent(RegisterEvent event) {
+    private final ForgeRegistryCache cache = new ForgeRegistryCache();
+
+    private RegistryEvent createRegisterEvent(RegisterEvent event) {
         return new RegistryEvent() {
             @Override
             public <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory) {
@@ -34,10 +38,13 @@ public class ForgeEntrypoint {
                     };
                 }
             }
+
+            @Override
+            public void addToTab(ResourceKey<CreativeModeTab> tab, Supplier<ItemStack> supplier) {
+                cache.addToTab(tab, supplier);
+            }
         };
     }
-
-    private final ForgeRegistryCache cache = new ForgeRegistryCache();
 
     public ForgeEntrypoint() {
         var modBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -58,5 +65,7 @@ public class ForgeEntrypoint {
         modBus.addListener(EventPriority.LOWEST, (RegisterEvent event) -> {
             cache.register(event);
         });
+
+        modBus.addListener(cache::buildTabs);
     }
 }

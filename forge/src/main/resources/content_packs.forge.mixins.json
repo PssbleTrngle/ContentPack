@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.possible_triangle.content_packs.forge.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "${mod_id}.refmap.json",
+  "refmap": "content_packs.refmap.json",
   "mixins": [
     "GameDataMixin"
   ],
