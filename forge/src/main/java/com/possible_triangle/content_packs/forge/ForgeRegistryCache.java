@@ -52,7 +52,7 @@ public class ForgeRegistryCache implements RegistryEvent {
     }
 
     @Override
-    public <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory) {
+    public  <T,R extends T> Supplier<R> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<R> factory){
         var value = factory.get();
         synchronized (factories) {
             factories.add(new FactoryEntry<>(registry, id, value));

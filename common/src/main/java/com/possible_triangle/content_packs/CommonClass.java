@@ -2,6 +2,7 @@ package com.possible_triangle.content_packs;
 
 import com.possible_triangle.content_packs.loader.ContentLoader;
 import com.possible_triangle.content_packs.loader.definition.block.BasicBlockType;
+import com.possible_triangle.content_packs.loader.definition.block.KelpBlockType;
 import com.possible_triangle.content_packs.loader.definition.block.SlabBlockType;
 import com.possible_triangle.content_packs.loader.definition.block.StairBlockType;
 import com.possible_triangle.content_packs.loader.definition.item.BasicBlockItemType;
@@ -51,6 +52,7 @@ public class CommonClass {
         event.register(ModRegistries.Keys.BLOCK_TYPES, new ResourceLocation("basic"), () -> BasicBlockType.CODEC);
         event.register(ModRegistries.Keys.BLOCK_TYPES, new ResourceLocation("slab"), () -> SlabBlockType.CODEC);
         event.register(ModRegistries.Keys.BLOCK_TYPES, new ResourceLocation("stairs"), () -> StairBlockType.CODEC);
+        event.register(ModRegistries.Keys.BLOCK_TYPES, new ResourceLocation("kelp"), () -> KelpBlockType.CODEC);
 
         event.register(ModRegistries.Keys.ITEM_TYPES, new ResourceLocation("basic"), () -> BasicItemType.CODEC);
         event.register(ModRegistries.Keys.ITEM_TYPES, new ResourceLocation("block_item"), () -> BasicBlockItemType.CODEC);

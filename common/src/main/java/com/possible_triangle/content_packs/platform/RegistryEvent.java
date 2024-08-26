@@ -10,7 +10,7 @@ import java.util.function.Supplier;
 
 public interface RegistryEvent {
 
-    <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory);
+    <T,R extends T> Supplier<R> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<R> factory);
 
     void addToTab(ResourceKey<CreativeModeTab> tab, Supplier<ItemStack> supplier);
 

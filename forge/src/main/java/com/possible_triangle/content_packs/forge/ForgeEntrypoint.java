@@ -27,7 +27,7 @@ public class ForgeEntrypoint {
     private RegistryEvent createRegisterEvent(RegisterEvent event) {
         return new RegistryEvent() {
             @Override
-            public <T> Supplier<T> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<T> factory) {
+            public  <T,R extends T> Supplier<R> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<R> factory) {
                 if (event.getRegistryKey().equals(registry)) {
                     var value = factory.get();
                     event.register(registry, id, () -> value);

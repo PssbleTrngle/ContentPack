@@ -21,7 +21,7 @@ public class FabricEntrypoint implements ModInitializer, DedicatedServerModIniti
     private static RegistryEvent REGISTER_EVENT = new RegistryEvent() {
         @SuppressWarnings("unchecked")
         @Override
-        public <T> Supplier<T> register(ResourceKey<Registry<T>> registryKey, ResourceLocation id, Supplier<T> factory) {
+        public <T, R extends T> Supplier<R> register(ResourceKey<Registry<T>> registryKey, ResourceLocation id, Supplier<R> factory) {
             var registryRegistry = (Registry<Registry<T>>) BuiltInRegistries.REGISTRY;
             var registry = registryRegistry.getOrThrow(registryKey);
             var created = Registry.register(registry, id, factory.get());
