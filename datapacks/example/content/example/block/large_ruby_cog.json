@@ -2,6 +2,5 @@
   "type": "create:cog",
   "large": true,
   "properties": {
-    "material": "metal"
   }
 }

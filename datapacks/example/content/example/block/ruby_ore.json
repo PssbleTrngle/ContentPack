@@ -1,7 +1,6 @@
 {
   "type": "basic",
   "properties": {
-    "material": "stone",
     "required_correct_tool": true
   }
 }
