@@ -15,7 +15,7 @@ public class KelpBlockType extends BlockDefinition {
             commonCodec(builder).apply(builder, KelpBlockType::new)
     );
 
-    protected KelpBlockType(BlockProperties properties) {
+    protected KelpBlockType(BlockPropertiesFactory properties) {
         super(properties);
     }
 

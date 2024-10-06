@@ -3,7 +3,7 @@ package com.possible_triangle.content_packs.forge.compat;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.loader.definition.block.BlockDefinition;
-import com.possible_triangle.content_packs.loader.definition.block.BlockProperties;
+import com.possible_triangle.content_packs.loader.definition.block.BlockPropertiesFactory;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.mehvahdjukaar.vsc.CutBlockType;
 import net.mehvahdjukaar.vsc.temp.TempVerticalSlabBlock;
@@ -16,7 +16,7 @@ public class VerticalSlabBlockType extends BlockDefinition {
         commonCodec(builder).apply(builder, VerticalSlabBlockType::new)
     );
 
-    protected VerticalSlabBlockType(BlockProperties properties) {
+    protected VerticalSlabBlockType(BlockPropertiesFactory properties) {
         super(properties);
     }
 

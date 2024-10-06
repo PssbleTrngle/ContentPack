@@ -1,6 +1,4 @@
 {
   "type": "basic",
-  "properties": {
-    "required_correct_tool": true
-  }
+  "properties": "minecraft:diamond_ore"
 }

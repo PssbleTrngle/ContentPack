@@ -9,7 +9,9 @@ public record BlockProperties(
         int lightLevel,
         boolean collisions,
         boolean requiresCorrectToolForDrops
-) {
+) implements BlockPropertiesFactory {
+
+    @Override
     public BlockBehaviour.Properties create() {
         var properties = BlockBehaviour.Properties.of()
                 .strength(strength)

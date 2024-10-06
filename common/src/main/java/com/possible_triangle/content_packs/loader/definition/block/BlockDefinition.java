@@ -21,15 +21,15 @@ public abstract class BlockDefinition implements BlockFactory {
         return ModRegistries.BLOCK_TYPES.byNameCodec().dispatchStable(BlockDefinition::codec, Function.identity());
     });
 
-    public static <T extends BlockDefinition> Products.P1<RecordCodecBuilder.Mu<T>, BlockProperties> commonCodec(RecordCodecBuilder.Instance<T> builder) {
+    public static <T extends BlockDefinition> Products.P1<RecordCodecBuilder.Mu<T>, BlockPropertiesFactory> commonCodec(RecordCodecBuilder.Instance<T> builder) {
         return builder.group(
-                BlockProperties.CODEC.fieldOf("properties").forGetter(it -> it.properties)
+                BlockPropertiesFactory.CODEC.fieldOf("properties").forGetter(it -> it.properties)
         );
     }
 
-    protected final BlockProperties properties;
+    protected final BlockPropertiesFactory properties;
 
-    protected BlockDefinition(BlockProperties properties) {
+    protected BlockDefinition(BlockPropertiesFactory properties) {
         this.properties = properties;
     }
 

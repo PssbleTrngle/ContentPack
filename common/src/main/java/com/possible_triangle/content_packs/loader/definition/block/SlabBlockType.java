@@ -13,7 +13,7 @@ public class SlabBlockType extends BlockDefinition {
         commonCodec(builder).apply(builder, SlabBlockType::new)
     );
 
-    protected SlabBlockType(BlockProperties properties) {
+    protected SlabBlockType(BlockPropertiesFactory properties) {
         super(properties);
     }
 

@@ -7,10 +7,8 @@ import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.ModRegistries;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
@@ -18,8 +16,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public abstract class ItemDefinition {
-
-    private static final ResourceKey<CreativeModeTab> TAB_KEY = ResourceKey.create(Registries.CREATIVE_MODE_TAB, new ResourceLocation("search"));
 
     public static final Codec<ItemDefinition> CODEC = ExtraCodecs.lazyInitializedCodec(() ->
             ModRegistries.ITEM_TYPES.byNameCodec().dispatchStable(ItemDefinition::codec, Function.identity())
@@ -45,7 +41,7 @@ public abstract class ItemDefinition {
         return event.register(Registries.ITEM, id, () -> {
             Constants.LOGGER.debug("registering item with id {}", id);
             var registered = create(event, id);
-            event.addToTab(TAB_KEY, () -> new ItemStack(registered));
+            event.addToTab(properties.creativeTabKey(), () -> new ItemStack(registered));
             return registered;
         });
     }

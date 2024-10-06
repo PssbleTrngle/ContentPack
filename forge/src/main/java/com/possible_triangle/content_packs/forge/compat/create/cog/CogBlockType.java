@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.forge.compat.create.CreateCompat;
 import com.possible_triangle.content_packs.loader.definition.block.BlockDefinition;
-import com.possible_triangle.content_packs.loader.definition.block.BlockProperties;
+import com.possible_triangle.content_packs.loader.definition.block.BlockPropertiesFactory;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
@@ -19,7 +19,7 @@ public class CogBlockType extends BlockDefinition {
 
     private final boolean large;
 
-    public CogBlockType(BlockProperties properties, boolean large) {
+    public CogBlockType(BlockPropertiesFactory properties, boolean large) {
         super(properties);
         this.large = large;
     }
