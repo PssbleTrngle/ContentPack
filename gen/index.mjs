@@ -22,6 +22,13 @@ async function run() {
       blocks.cog({ material: "metal", strength: 2.0, large: true }),
   });
 
+  loader.models.blocks.add(`example:large_lapis_cog_shaftless`, {
+    parent: "create:block/large_cogwheel_shaftless",
+    textures: {
+      4: "example:block/large_lapis_cog",
+    },
+  });
+
   logger.info("generating modified resources...");
   await loader.emit(output.createAcceptor());
   await output.finalize();
