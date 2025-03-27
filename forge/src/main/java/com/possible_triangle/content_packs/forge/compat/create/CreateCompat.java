@@ -27,7 +27,7 @@ public class CreateCompat {
 
     private static final BlockEntityBuilder<BracketedKineticBlockEntity, ?> CUSTOM_COGWHEEL_BUILDER = REGISTRATE
             .blockEntity("cogwheel", BracketedKineticBlockEntity::new)
-            .instance(() -> CustomCogInstance::new, false)
+            .visual(() -> CustomCogInstance::create)
             .renderer(() -> BracketedKineticBlockEntityRenderer::new);
 
     public static final BlockEntityEntry<BracketedKineticBlockEntity> CUSTOM_COGWHEEL = CUSTOM_COGWHEEL_BUILDER.register();
@@ -45,6 +45,7 @@ public class CreateCompat {
     public static void registerCogwheel(Block block, ResourceLocation id) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id, BracketedKineticBlockModel::new);
+            CustomCogInstance.createModel(id);
         });
 
         CUSTOM_COGWHEEL_BUILDER.validBlock(() -> block);

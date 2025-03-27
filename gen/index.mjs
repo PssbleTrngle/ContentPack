@@ -9,7 +9,7 @@ async function run() {
     {}
   );
 
-  const loader = new PackLoader(logger);
+  const loader = new PackLoader(logger, { packFormat: 15 });
 
   loader.content.items.blockItem("example:small_lapis_cog", {
     type: "create:cog",

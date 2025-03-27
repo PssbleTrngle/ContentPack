@@ -1,4 +1,7 @@
 {
   "parent": "create:block/cogwheel",
-  "textures": { "1_2": "example:block/small_lapis_cog" }
+  "textures": {
+    "1_2": "example:block/small_lapis_cog",
+    "particle": "example:block/small_lapis_cog"
+  }
 }
