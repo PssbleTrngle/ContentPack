@@ -5,7 +5,6 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class BasicBlockType extends BlockDefinition {
 
@@ -13,7 +12,7 @@ public class BasicBlockType extends BlockDefinition {
         commonCodec(builder).apply(builder, BasicBlockType::new)
     );
 
-    protected BasicBlockType(BlockProperties properties) {
+    protected BasicBlockType(BlockPropertiesFactory properties) {
         super(properties);
     }
 

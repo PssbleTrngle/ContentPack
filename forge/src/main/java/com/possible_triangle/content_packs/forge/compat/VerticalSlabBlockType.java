@@ -3,9 +3,10 @@ package com.possible_triangle.content_packs.forge.compat;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.loader.definition.block.BlockDefinition;
-import com.possible_triangle.content_packs.loader.definition.block.BlockProperties;
+import com.possible_triangle.content_packs.loader.definition.block.BlockPropertiesFactory;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
-import net.mehvahdjukaar.moonlight.api.block.VerticalSlabBlock;
+import net.mehvahdjukaar.vsc.CutBlockType;
+import net.mehvahdjukaar.vsc.temp.TempVerticalSlabBlock;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
@@ -15,7 +16,7 @@ public class VerticalSlabBlockType extends BlockDefinition {
         commonCodec(builder).apply(builder, VerticalSlabBlockType::new)
     );
 
-    protected VerticalSlabBlockType(BlockProperties properties) {
+    protected VerticalSlabBlockType(BlockPropertiesFactory properties) {
         super(properties);
     }
 
@@ -26,7 +27,7 @@ public class VerticalSlabBlockType extends BlockDefinition {
 
     @Override
     protected Block create(RegistryEvent event, ResourceLocation id) {
-        return new VerticalSlabBlock(properties.create());
+        return new TempVerticalSlabBlock(properties.create(), new CutBlockType(id, null, null));
     }
 
 }

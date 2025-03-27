@@ -7,14 +7,14 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.loader.definition.block.BlockDefinition;
 import com.possible_triangle.content_packs.loader.definition.block.BlockFactory;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
-import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 
 public abstract class BlockItemDefinition extends ItemDefinition {
 
-    private static final Codec<BlockFactory> BLOCK_CODEC = Codec.either(Registry.BLOCK.byNameCodec(), BlockDefinition.CODEC).xmap(it ->
+    private static final Codec<BlockFactory> BLOCK_CODEC = Codec.either(BuiltInRegistries.BLOCK.byNameCodec(), BlockDefinition.CODEC).xmap(it ->
                     it.<BlockFactory>map(
                             block -> (r, id) -> block,
                             definition -> definition

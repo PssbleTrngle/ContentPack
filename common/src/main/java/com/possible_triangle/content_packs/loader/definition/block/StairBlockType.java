@@ -19,7 +19,7 @@ public class StairBlockType extends BlockDefinition {
 
     private final BlockState base;
 
-    protected StairBlockType(BlockProperties properties, BlockState base) {
+    protected StairBlockType(BlockPropertiesFactory properties, BlockState base) {
         super(properties);
         this.base = base;
     }

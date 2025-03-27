@@ -1,0 +1,5 @@
+{
+  "type": "minecraft:block_item",
+  "block": { "type": "kelp", "properties": { "strength": 0 } },
+  "properties": {}
+}

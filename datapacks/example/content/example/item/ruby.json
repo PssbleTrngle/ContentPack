@@ -1,6 +1,7 @@
 {
   "type": "basic",
   "properties": {
-    "rarity": "rare"
+    "rarity": "rare",
+    "creative_tab": "ingredients"
   }
 }

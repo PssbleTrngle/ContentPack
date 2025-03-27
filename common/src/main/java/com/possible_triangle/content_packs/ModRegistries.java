@@ -12,7 +12,7 @@ import net.minecraft.resources.ResourceLocation;
 import java.util.Collection;
 import java.util.List;
 
-public class Registries {
+public class ModRegistries {
 
     public static class Keys {
         public static final ResourceKey<Registry<Codec<? extends BlockDefinition>>> BLOCK_TYPES =
@@ -32,8 +32,8 @@ public class Registries {
     }
 
 
-    public static final RegistryCodecSupplier<Codec<? extends BlockDefinition>> BLOCK_TYPES = Services.PLATFORM.createRegistry(codecClass(), Keys.BLOCK_TYPES);
-    public static final RegistryCodecSupplier<Codec<? extends ItemDefinition>> ITEM_TYPES = Services.PLATFORM.createRegistry(codecClass(), Keys.ITEM_TYPES);
+    public static final RegistryCodecSupplier<Codec<? extends BlockDefinition>> BLOCK_TYPES = Services.PLATFORM.createRegistry(Keys.BLOCK_TYPES);
+    public static final RegistryCodecSupplier<Codec<? extends ItemDefinition>> ITEM_TYPES = Services.PLATFORM.createRegistry(Keys.ITEM_TYPES);
 
     public static void load() {
         // Loads this class

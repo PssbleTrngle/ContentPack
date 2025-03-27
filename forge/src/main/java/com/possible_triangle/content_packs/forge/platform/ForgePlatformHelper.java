@@ -4,8 +4,8 @@ import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.packs.PackType;
-import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.NewRegistryEvent;
@@ -19,6 +19,7 @@ public class ForgePlatformHelper implements IPlatformHelper {
     private static class RegistryDelegate<T> implements RegistryCodecSupplier<T> {
 
         private Supplier<IForgeRegistry<T>> registry;
+
         public RegistryDelegate(RegistryBuilder<T> builder) {
             var modBus = FMLJavaModLoadingContext.get().getModEventBus();
             modBus.addListener((NewRegistryEvent event) -> {
@@ -33,14 +34,9 @@ public class ForgePlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public <T> RegistryCodecSupplier<T> createRegistry(Class<T> clazz, ResourceKey<Registry<T>> key) {
+    public <T> RegistryCodecSupplier<T> createRegistry(ResourceKey<Registry<T>> key) {
         var builder = new RegistryBuilder<T>().setName(key.location());
         return new RegistryDelegate<>(builder);
     }
 
-    @Override
-    public Pack.PackConstructor createPackConstructor() {
-        return (name, component, b, supplier, packMetadataSection, position, packSource, hidden) ->
-                new Pack(name, component, b, supplier, packMetadataSection, PackType.SERVER_DATA, position, packSource, hidden);
-    }
 }

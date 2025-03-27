@@ -6,7 +6,7 @@ public enum CompatMods {
 
     CREATE("create"),
     BOTANIA("botania"),
-    MOONLIGHT("moonlight");
+    V_SLAB("v_slab_compat");
 
     public final String modid;
 

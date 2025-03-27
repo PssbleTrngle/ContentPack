@@ -1,7 +1,7 @@
 package com.possible_triangle.content_packs.forge.compat.create;
 
 import com.possible_triangle.content_packs.Constants;
-import com.possible_triangle.content_packs.Registries;
+import com.possible_triangle.content_packs.ModRegistries;
 import com.possible_triangle.content_packs.forge.compat.CompatMods;
 import com.possible_triangle.content_packs.forge.compat.create.cog.CogBlockType;
 import com.possible_triangle.content_packs.forge.compat.create.cog.CogItemType;
@@ -27,7 +27,7 @@ public class CreateCompat {
 
     private static final BlockEntityBuilder<BracketedKineticBlockEntity, ?> CUSTOM_COGWHEEL_BUILDER = REGISTRATE
             .blockEntity("cogwheel", BracketedKineticBlockEntity::new)
-            .instance(() -> CustomCogInstance::new, false)
+            .visual(() -> CustomCogInstance::create)
             .renderer(() -> BracketedKineticBlockEntityRenderer::new);
 
     public static final BlockEntityEntry<BracketedKineticBlockEntity> CUSTOM_COGWHEEL = CUSTOM_COGWHEEL_BUILDER.register();
@@ -37,14 +37,15 @@ public class CreateCompat {
     }
 
     public static void register(RegistryEvent event) {
-        event.register(Registries.Keys.BLOCK_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "cog"), () -> CogBlockType.CODEC);
-        event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "cog"), () -> CogItemType.CODEC);
-        event.register(Registries.Keys.ITEM_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "transition_item"), () -> TransitionItemType.CODEC);
+        event.register(ModRegistries.Keys.BLOCK_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "cog"), () -> CogBlockType.CODEC);
+        event.register(ModRegistries.Keys.ITEM_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "cog"), () -> CogItemType.CODEC);
+        event.register(ModRegistries.Keys.ITEM_TYPES, new ResourceLocation(CompatMods.CREATE.modid, "transition_item"), () -> TransitionItemType.CODEC);
     }
 
     public static void registerCogwheel(Block block, ResourceLocation id) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id, BracketedKineticBlockModel::new);
+            CustomCogInstance.createModel(id);
         });
 
         CUSTOM_COGWHEEL_BUILDER.validBlock(() -> block);
