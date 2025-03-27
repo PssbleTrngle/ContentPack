@@ -8,7 +8,7 @@
     "generate": "node index.mjs"
   },
   "dependencies": {
-    "@pssbletrngle/data-modifier": "^0.2.0",
+    "@pssbletrngle/data-modifier": "^0.3.4",
     "@pssbletrngle/resource-merger": "^1.2.4"
   }
 }
