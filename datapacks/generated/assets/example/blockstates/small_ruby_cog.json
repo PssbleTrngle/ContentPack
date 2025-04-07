@@ -1,7 +1,0 @@
-{
-  "variants": {
-    "axis=x": { "model": "example:block/small_ruby_cog", "x": 90, "y": 90 },
-    "axis=y": { "model": "example:block/small_ruby_cog" },
-    "axis=z": { "model": "example:block/small_ruby_cog", "x": 90, "y": 180 }
-  }
-}

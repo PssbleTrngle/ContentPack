@@ -4,6 +4,7 @@ import com.mojang.datafixers.Products;
 import com.mojang.datafixers.util.Either;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.possible_triangle.content_packs.LazyCodecs;
 import com.possible_triangle.content_packs.loader.definition.block.BlockDefinition;
 import com.possible_triangle.content_packs.loader.definition.block.BlockFactory;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
@@ -14,14 +15,14 @@ import net.minecraft.world.level.block.Block;
 
 public abstract class BlockItemDefinition extends ItemDefinition {
 
-    private static final Codec<BlockFactory> BLOCK_CODEC = Codec.either(BuiltInRegistries.BLOCK.byNameCodec(), BlockDefinition.CODEC).xmap(it ->
+    private static final Codec<BlockFactory> BLOCK_CODEC = Codec.either(LazyCodecs.byNameCodec(BuiltInRegistries.BLOCK), BlockDefinition.CODEC).xmap(it ->
                     it.<BlockFactory>map(
-                            block -> (r, id) -> block,
+                            block -> (r, id) -> block.get(),
                             definition -> definition
                     ),
             factory -> {
                 if (factory instanceof BlockDefinition definition) return Either.right(definition);
-                return Either.left(factory.createAndRegister(null, null));
+                return Either.left(() -> factory.createAndRegister(null, null));
             }
     );
 

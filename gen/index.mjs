@@ -22,17 +22,6 @@ async function run() {
       blocks.cog({ material: "metal", strength: 2.0, large: true }),
   });
 
-  loader.content.items.blockItem("example:small_ruby_cog", {
-    type: "create:cog",
-    block: (blocks) => blocks.cog({ copy: "create:cogwheel" }),
-  });
-
-  loader.content.items.blockItem("example:large_ruby_cog", {
-    type: "create:cog",
-    block: (blocks) =>
-      blocks.cog({ large: true, copy: "create:large_cogwheel" }),
-  });
-
   logger.info("generating modified resources...");
   await loader.emit(output.createAcceptor());
   await output.finalize();
