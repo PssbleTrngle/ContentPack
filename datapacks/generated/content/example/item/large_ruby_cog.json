@@ -1,0 +1,9 @@
+{
+  "type": "create:cog",
+  "block": {
+    "type": "create:cog",
+    "large": true,
+    "properties": "create:large_cogwheel"
+  },
+  "properties": {}
+}

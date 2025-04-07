@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "axis=x": { "model": "example:block/small_lapis_cog", "x": 90, "y": 90 },
+    "axis=y": { "model": "example:block/small_lapis_cog" },
+    "axis=z": { "model": "example:block/small_lapis_cog", "x": 90, "y": 180 }
+  }
+}

@@ -45,7 +45,7 @@ public class CreateCompat {
     public static void registerCogwheel(Block block, ResourceLocation id) {
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id, BracketedKineticBlockModel::new);
-            CustomCogInstance.createModel(id);
+            CustomCogInstance.createModel(block, id);
         });
 
         CUSTOM_COGWHEEL_BUILDER.validBlock(() -> block);

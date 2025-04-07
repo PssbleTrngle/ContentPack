@@ -16,26 +16,30 @@ import dev.engine_room.flywheel.lib.model.Models;
 import dev.engine_room.flywheel.lib.model.baked.PartialModel;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraft.world.level.block.Block;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Consumer;
 
 public class CustomCogInstance {
 
+    private static final Map<Block, PartialModel> MODELS = new HashMap<>();
+
     public static SingleAxisRotatingVisual<BracketedKineticBlockEntity> create(VisualizationContext context, BracketedKineticBlockEntity tile, float partialTick) {
-        var id = ForgeRegistries.BLOCKS.getKey(tile.getBlockState().getBlock());
+        var model = Models.partial(MODELS.get(tile.getBlockState().getBlock()));
         if (ICogWheel.isLargeCog(tile.getBlockState())) {
-            var model = Models.partial(createModel(id.withSuffix("_shaftless")));
             return new Large(context, tile, partialTick, model);
         } else {
-            var model = Models.partial(createModel(id));
             return new SingleAxisRotatingVisual<>(context, tile, partialTick, model);
         }
     }
 
-    public static PartialModel createModel(ResourceLocation id) {
+    public static void createModel(Block block, ResourceLocation id) {
         var path = id.withPrefix("block/");
-        return PartialModel.of(path);
+        if (ICogWheel.isLargeCog(block)) path = path.withSuffix("_shaftless");
+        var model = PartialModel.of(path);
+        MODELS.putIfAbsent(block, model);
     }
 
     /**

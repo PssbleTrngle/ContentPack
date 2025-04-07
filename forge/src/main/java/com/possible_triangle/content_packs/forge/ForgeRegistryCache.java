@@ -13,59 +13,34 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.RegisterEvent;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Supplier;
 
 public class ForgeRegistryCache implements RegistryEvent {
 
-    public static class FactoryEntry<T, R extends T> implements Supplier<R> {
-
-        public final ResourceKey<Registry<T>> registry;
-        public final ResourceLocation id;
-        private final Supplier<R> factory;
-
-        @Nullable
-        private R value;
-
-        public FactoryEntry(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<R> factory) {
-            this.registry = registry;
-            this.id = id;
-            this.factory = factory;
-        }
-
+    public record FactoryEntry<T>(ResourceKey<Registry<T>> registry, ResourceLocation id, T value) {
         void register(RegisterEvent event) {
-            this.value = factory.get();
-            event.register(registry, id, () -> value);
-        }
-
-        @Override
-        public R get() {
-            return Objects.requireNonNull(value, () -> id + " has not been registered yet");
+            event.register(registry(), id(), this::value);
         }
     }
 
-    private final Set<FactoryEntry<?, ?>> factories = new HashSet<>();
+    private final Set<FactoryEntry<?>> factories = new HashSet<>();
     private final Map<ResourceKey<CreativeModeTab>, Collection<Supplier<ItemStack>>> tabs = new HashMap<>();
 
     private boolean loaded;
 
     public void register(RegisterEvent event) {
-        var registry = event.getRegistryKey().location();
-        if (registry.getNamespace().equals(Constants.MOD_ID)) return;
+        if (event.getRegistryKey().location().getNamespace().equals(Constants.MOD_ID)) return;
 
         if (!loaded) load();
         synchronized (factories) {
-            factories.forEach(it -> {
-                it.register(event);
-            });
+            factories.forEach(it -> it.register(event));
         }
     }
 
@@ -77,12 +52,12 @@ public class ForgeRegistryCache implements RegistryEvent {
     }
 
     @Override
-    public <T, R extends T> Supplier<R> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<R> factory) {
-        var entry = new FactoryEntry<>(registry, id, factory::get);
+    public  <T,R extends T> Supplier<R> register(ResourceKey<Registry<T>> registry, ResourceLocation id, Supplier<R> factory){
+        var value = factory.get();
         synchronized (factories) {
-            factories.add(entry);
+            factories.add(new FactoryEntry<>(registry, id, value));
         }
-        return entry;
+        return () -> value;
     }
 
     @Override
