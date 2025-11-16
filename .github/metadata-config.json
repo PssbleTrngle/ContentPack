@@ -1,0 +1,12 @@
+{
+  "$schema": "https://webhooks.new.macarena.ceo/schema/config.json",
+  "type": "minecraft",
+  "loaders": [
+    "forge",
+    "fabric"
+  ],
+  "upload": {
+    "nexus": true,
+    "modrinth": true
+  }
+}
