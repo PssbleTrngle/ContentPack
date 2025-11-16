@@ -13,6 +13,8 @@ description='''
 Data-driven item/block creation
 '''
 
+updateJSONURL = "https://api.modrinth.com/updates/content-packs/forge_updates.json"
+
 [[dependencies.${mod_id}]]
     modId="forge"
     mandatory=true

@@ -5,7 +5,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "content_packs.refmap.json",
   "mixins": [
-    "GameDataMixin"
+    "GameDataMixin",
+    "RegisterEventMixin"
   ],
   "injectors": {
     "defaultRequire": 1

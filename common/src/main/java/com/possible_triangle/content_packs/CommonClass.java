@@ -9,6 +9,8 @@ import com.possible_triangle.content_packs.loader.definition.item.BasicBlockItem
 import com.possible_triangle.content_packs.loader.definition.item.BasicItemType;
 import com.possible_triangle.content_packs.loader.listener.BlockDefinitionListener;
 import com.possible_triangle.content_packs.loader.listener.ItemDefinitionListener;
+import com.possible_triangle.content_packs.loader.listener.RegistryRedirectListener;
+import com.possible_triangle.content_packs.loader.redirect.RegistryRedirector;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
 import java.io.File;
 import net.minecraft.Util;
@@ -33,6 +35,7 @@ public class CommonClass {
         // TODO call events
         loader.register(new BlockDefinitionListener(registryAccess, event));
         loader.register(new ItemDefinitionListener(registryAccess, event));
+        loader.register(new RegistryRedirectListener(registryAccess, RegistryRedirector.INSTANCE));
 
         var reload = loader.load();
         reload.done().thenRun(() -> {

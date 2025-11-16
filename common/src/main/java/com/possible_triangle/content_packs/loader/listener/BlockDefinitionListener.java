@@ -6,6 +6,8 @@ import com.possible_triangle.content_packs.platform.RegistryEvent;
 import java.util.Map;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.util.profiling.ProfilerFiller;
 
 public class BlockDefinitionListener extends CodecDrivenReloadListener<BlockDefinition> {
 
@@ -22,7 +24,7 @@ public class BlockDefinitionListener extends CodecDrivenReloadListener<BlockDefi
     }
 
     @Override
-    protected void consume(Map<ResourceLocation, BlockDefinition> entries) {
+    protected void apply(Map<ResourceLocation, BlockDefinition> entries, ResourceManager manager, ProfilerFiller profiler) {
         entries.forEach((id, definition) -> {
             definition.register(event, id);
         });
