@@ -3,10 +3,9 @@ package com.possible_triangle.content_packs.loader.listener;
 import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.loader.definition.item.ItemDefinition;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
+import java.util.Map;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.Map;
 
 public class ItemDefinitionListener extends CodecDrivenReloadListener<ItemDefinition> {
 

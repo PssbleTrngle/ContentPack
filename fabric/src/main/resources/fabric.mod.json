@@ -2,24 +2,28 @@
   "schemaVersion": 1,
   "id": "${mod_id}",
   "version": "${mod_version}",
-
   "name": "${mod_name}",
   "description": "Data-driven item/block creation",
-  "authors": ["${mod_author}"],
+  "authors": [
+    "${mod_author}"
+  ],
   "contact": {
     "sources": "https://github.com/${repository}",
     "issues": "https://github.com/${repository}/issues"
   },
-
   "license": "CC0-1.0",
-
   "environment": "*",
   "entrypoints": {
-    "main": ["com.possible_triangle.content_packs.fabric.FabricEntrypoint"],
-    "server": ["com.possible_triangle.content_packs.fabric.FabricEntrypoint"],
-    "client": ["com.possible_triangle.content_packs.fabric.FabricEntrypoint"]
+    "main": [
+      "com.possible_triangle.content_packs.fabric.FabricEntrypoint"
+    ],
+    "server": [
+      "com.possible_triangle.content_packs.fabric.FabricEntrypoint"
+    ],
+    "client": [
+      "com.possible_triangle.content_packs.fabric.FabricEntrypoint"
+    ]
   },
-
   "depends": {
     "fabricloader": ">=0.14",
     "fabric": "*",

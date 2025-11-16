@@ -2,14 +2,13 @@ package com.possible_triangle.content_packs.loader.definition.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.Optional;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;
-
-import java.util.Optional;
 
 public record ItemProperties(Rarity rarity, Optional<Integer> stackSize, Optional<Integer> durablity,
                              boolean fireResistant, String creativeTab) {

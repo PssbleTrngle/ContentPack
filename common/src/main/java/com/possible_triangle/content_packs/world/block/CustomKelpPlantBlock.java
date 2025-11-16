@@ -1,9 +1,8 @@
 package com.possible_triangle.content_packs.world.block;
 
+import java.util.Objects;
 import net.minecraft.world.level.block.GrowingPlantHeadBlock;
 import net.minecraft.world.level.block.KelpPlantBlock;
-
-import java.util.Objects;
 
 public class CustomKelpPlantBlock extends KelpPlantBlock {
 

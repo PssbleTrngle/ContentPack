@@ -10,12 +10,11 @@ import com.possible_triangle.content_packs.loader.definition.item.BasicItemType;
 import com.possible_triangle.content_packs.loader.listener.BlockDefinitionListener;
 import com.possible_triangle.content_packs.loader.listener.ItemDefinitionListener;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
+import java.io.File;
 import net.minecraft.Util;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ReloadInstance;
-
-import java.io.File;
 
 public class CommonClass {
 

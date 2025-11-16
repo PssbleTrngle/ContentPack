@@ -3,6 +3,7 @@ package com.possible_triangle.content_packs.fabric;
 import com.possible_triangle.content_packs.ClientClass;
 import com.possible_triangle.content_packs.CommonClass;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
+import java.util.function.Supplier;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.DedicatedServerModInitializer;
 import net.fabricmc.api.ModInitializer;
@@ -13,8 +14,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.function.Supplier;
 
 public class FabricEntrypoint implements ModInitializer, DedicatedServerModInitializer, ClientModInitializer {
 

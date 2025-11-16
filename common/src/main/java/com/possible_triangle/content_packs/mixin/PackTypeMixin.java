@@ -1,5 +1,8 @@
 package com.possible_triangle.content_packs.mixin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Locale;
 import net.minecraft.server.packs.PackType;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -7,10 +10,6 @@ import org.spongepowered.asm.mixin.Mutable;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.gen.Invoker;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Locale;
 
 @Mixin(PackType.class)
 public class PackTypeMixin {

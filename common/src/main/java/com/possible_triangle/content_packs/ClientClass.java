@@ -2,11 +2,10 @@ package com.possible_triangle.content_packs;
 
 import com.possible_triangle.content_packs.loader.ContentLoader;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
+import java.io.File;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.LoadingOverlay;
 import net.minecraft.core.RegistryAccess;
-
-import java.io.File;
 
 public class ClientClass {
 

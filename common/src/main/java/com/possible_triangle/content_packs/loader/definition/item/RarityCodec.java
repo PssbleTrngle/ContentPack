@@ -2,9 +2,8 @@ package com.possible_triangle.content_packs.loader.definition.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
-import net.minecraft.world.item.Rarity;
-
 import java.util.Locale;
+import net.minecraft.world.item.Rarity;
 
 public class RarityCodec {
 

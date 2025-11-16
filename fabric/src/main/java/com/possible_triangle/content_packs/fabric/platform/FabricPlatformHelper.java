@@ -2,13 +2,8 @@ package com.possible_triangle.content_packs.fabric.platform;
 
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;
 import net.fabricmc.fabric.api.event.registry.FabricRegistryBuilder;
-import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-
-import java.util.function.Supplier;
 
 public class FabricPlatformHelper implements IPlatformHelper {
 

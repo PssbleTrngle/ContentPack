@@ -8,15 +8,14 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DynamicOps;
 import com.mojang.serialization.JsonOps;
 import com.possible_triangle.content_packs.Constants;
+import java.util.Map;
+import java.util.Optional;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
-
-import java.util.Map;
-import java.util.Optional;
 
 public abstract class CodecDrivenReloadListener<T> extends SimpleJsonResourceReloadListener {
 

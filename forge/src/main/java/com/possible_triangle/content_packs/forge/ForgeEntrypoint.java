@@ -7,6 +7,7 @@ import com.possible_triangle.content_packs.forge.compat.VSlabCompatCompat;
 import com.possible_triangle.content_packs.forge.compat.botania.BotaniaCompat;
 import com.possible_triangle.content_packs.forge.compat.create.CreateCompat;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
+import java.util.function.Supplier;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -16,8 +17,6 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
-
-import java.util.function.Supplier;
 
 @Mod(Constants.MOD_ID)
 public class ForgeEntrypoint {

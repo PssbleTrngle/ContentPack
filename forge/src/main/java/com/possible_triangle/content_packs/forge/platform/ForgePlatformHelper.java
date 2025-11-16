@@ -2,17 +2,14 @@ package com.possible_triangle.content_packs.forge.platform;
 
 import com.mojang.serialization.Codec;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;
+import java.util.Objects;
+import java.util.function.Supplier;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.NewRegistryEvent;
 import net.minecraftforge.registries.RegistryBuilder;
-
-import java.util.Objects;
-import java.util.function.Supplier;
 
 public class ForgePlatformHelper implements IPlatformHelper {
 

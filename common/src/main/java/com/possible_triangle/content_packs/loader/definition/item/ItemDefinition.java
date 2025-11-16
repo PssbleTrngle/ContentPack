@@ -6,14 +6,13 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.ModRegistries;
 import com.possible_triangle.content_packs.platform.RegistryEvent;
+import java.util.function.Function;
+import java.util.function.Supplier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.function.Function;
-import java.util.function.Supplier;
 
 public abstract class ItemDefinition {
 

@@ -2,7 +2,6 @@ package com.possible_triangle.content_packs.platform;
 
 import com.possible_triangle.content_packs.Constants;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper;
-
 import java.util.ServiceLoader;
 
 public class Services {

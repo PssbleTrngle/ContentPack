@@ -5,12 +5,11 @@ import com.possible_triangle.content_packs.loader.definition.block.BlockDefiniti
 import com.possible_triangle.content_packs.loader.definition.item.ItemDefinition;
 import com.possible_triangle.content_packs.platform.Services;
 import com.possible_triangle.content_packs.platform.services.IPlatformHelper.RegistryCodecSupplier;
+import java.util.Collection;
+import java.util.List;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-
-import java.util.Collection;
-import java.util.List;
 
 public class ModRegistries {
 
