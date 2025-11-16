@@ -1,7 +1,5 @@
-import net.minecraftforge.gradle.common.util.MinecraftExtension
 import org.spongepowered.asm.gradle.plugins.MixinExtension
 
-val mod_id: String by extra
 val mc_version: String by extra
 val registrate_forge_version: String by extra
 val ponder_forge_version: String by extra
@@ -10,26 +8,21 @@ val jei_version: String by extra
 val flywheel_version: String by extra
 val botania_forge_version: String by extra
 val vslab_forge_version: String by extra
-val mixin_extras_version: String by extra
+
+plugins {
+    id("com.possible-triangle.forge")
+}
 
 forge {
     enableMixins()
 
     dependOn(project(":common"))
 
-    // includesMod("com.tterrag.registrate:Registrate:${registrate_forge_version}")
-}
-
-configure<MinecraftExtension> {
-    runs {
-        forEach {
-            it.property("forge.logging.console.level", "debug")
-        }
-    }
+    // mods.include("com.tterrag.registrate:Registrate:${registrate_forge_version}")
 }
 
 configure<MixinExtension> {
-    config("${mod_id}.forge.mixins.json")
+    config("${mod.id.get()}.forge.mixins.json")
 }
 
 dependencies {
@@ -46,11 +39,9 @@ dependencies {
 
     if (!env.isCI) {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-        modRuntimeOnly("io.github.llamalad7:mixinextras-forge:${mixin_extras_version}")
     }
 }
 
-uploadToCurseforge()
-uploadToModrinth {
+upload.modrinth {
     syncBodyFromReadme()
 }

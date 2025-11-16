@@ -1,13 +1,14 @@
 plugins {
-    idea
-    id("com.possible-triangle.gradle") version ("0.2.5")
+    id("com.possible-triangle.core")
+    id("com.possible-triangle.vanilla") apply false
+    id("com.possible-triangle.forge") apply false
+    id("com.possible-triangle.fabric") apply false
 }
 
 subprojects {
-    repositories {
-        modrinthMaven()
-        curseMaven()
+    apply(plugin = "com.possible-triangle.core")
 
+    repositories {
         maven {
             url = uri("https://mvn.devos.one/snapshots/")
             content {
@@ -39,18 +40,18 @@ subprojects {
                 includeGroup("vazkii.botania")
             }
         }
-
-        maven {
-            url = uri("https://jitpack.io")
-            content {
-                includeGroup("com.github.LlamaLad7")
-                includeGroup("com.github.llamalad7.mixinextras")
-            }
-        }
     }
 
-    enablePublishing {
-        githubPackages()
+    upload {
+        maven {
+            nexus()
+        }
     }
 }
 
+tasks.withType<Jar> {
+    exclude("datapacks")
+}
+
+enableSpotless()
+enableSonarQube()

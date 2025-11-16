@@ -2,10 +2,14 @@ val mc_version: String by extra
 val registrate_fabric_version: String by extra
 val jei_version: String by extra
 
+plugins {
+    id("com.possible-triangle.fabric")
+}
+
 fabric {
     dependOn(project(":common"))
 
-    // includesMod("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
+    // mods.include("com.tterrag.registrate_fabric:Registrate:${registrate_fabric_version}")
 }
 
 dependencies {
@@ -13,6 +17,3 @@ dependencies {
         modRuntimeOnly("mezz.jei:jei-${mc_version}-fabric:${jei_version}")
     }
 }
-
-uploadToCurseforge()
-uploadToModrinth()
