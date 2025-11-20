@@ -4,6 +4,7 @@
   "package": "com.possible_triangle.content_packs.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "MappedRegistryAccessor",
     "MappedRegistryMixin",
     "PackTypeMixin"
   ],

@@ -1,0 +1,6 @@
+{
+  "entries": {
+    "create:brass_ingot": "minecraft:diamond",
+    "create:polished_rose_quartz": "minecraft:redstone_block"
+  }
+}
